@@ -4,7 +4,10 @@ using UnityEngine;
 
 public class Class : MonoBehaviour
 {
-    
+    private void Awake()
+    {
+        
+    }
 }
 
 
@@ -46,17 +49,40 @@ public class _Shark
     }
 }
 
-public class Shark //유저가 쓴거 저장
+public class Shark
 {
     private short hunger; // 배고픔
-    private short curSize; // 현재 크기
+    private short curSize; // 현재 크기 - > 산소량, 먹이 등 비례한다
     private short stress; // 스트레스
 }
 
 public class WaterTank
 {
     private Shark[] shark; // 개체 넣어주기 
+    private Part part;
     private short averageStr; // 평균 스트레스
     private short volume; // 용량
     private short waterQuality; //수질 (종에 알맞는 수질인지 아닌지)
+}
+
+public struct Oxygen
+{
+    short raiting; //등급s
+}
+
+public struct WaterQuality
+{
+    short raiting; // 등급
+}
+
+public struct Volume
+{
+    short size; // 크기
+}
+
+public class Part
+{
+    private Oxygen oxygen;
+    private WaterQuality waterQuality;
+    private Volume volume;
 }
