@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class InterfaceManager : MonoBehaviour
 {
@@ -17,7 +18,11 @@ public class InterfaceManager : MonoBehaviour
         switch (type)
         {
             case _TyIf.MENU:
-                
+                for (int i = 0; i < handle.childs.Length; i++)
+                {
+                    Interface temp = handle.childs[i];
+                    temp.gameObject.SetActive(true);
+                }
                 break;
             case _TyIf.PARTSHOP:
 
