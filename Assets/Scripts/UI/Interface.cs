@@ -4,20 +4,21 @@ using UnityEngine;
 
 public class Interface : MonoBehaviour
 {
-
-    private short instance;
+    public Interface[] childs;
+    [SerializeField]
     private _TyIf type;
+    public Interface parent;
 
 
-    public Interface(short instance, _TyIf type)
+    public Interface(Interface parent, _TyIf type)
     {
-        this.instance = instance;
+        this.parent = parent;
         this.type = type;
     }
 
-    public void PressButton()
+    public void Press()
     {
-
+        GameManager.Instance.interfaceManager.CallRecieve(this, type);
     }
 }
 public enum _TyIf
