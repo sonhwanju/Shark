@@ -8,7 +8,7 @@ public class Class : MonoBehaviour
 }
 
 
-public class _Shark
+public class _Shark 
 {
     private string name; // 이름
     private int price; // 가격
@@ -32,9 +32,21 @@ public class _Shark
         this.dowLimit = _dowLimit;
         this.neWaterQuality = _neWaterQuality;
     }
+    public void Show()
+    {
+        Debug.Log(this.name);
+        Debug.Log(this.price);
+        Debug.Log(this.adultTime);
+        Debug.Log(this.stressLimit);
+        Debug.Log(this.special);
+        Debug.Log(this.maxSize);
+        Debug.Log(this.minSize);
+        Debug.Log(this.dowLimit);
+        Debug.Log(this.neWaterQuality);
+    }
 }
 
-public class Shark
+public class Shark //유저가 쓴거 저장
 {
     private short hunger; // 배고픔
     private short curSize; // 현재 크기
