@@ -4,18 +4,18 @@ using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
-    private InterfaceManager interfaceManager;
+    public InterfaceManager interfaceManager;
 
     Dictionary<string, _Shark> _shark;
     void Start()
     {
-        interfaceManager = new InterfaceManager();
+        interfaceManager = gameObject.GetComponent<InterfaceManager>();
 
         _shark = new Dictionary<string, _Shark>();
         string name;
 
-        name = "귀상어";
-        _shark.Add(name, new _Shark(name, 100000, 20, 5, 3, 10, 1, 100, 5));
+        name = "귀상어"; //임의 값
+        _shark.Add(name, new _Shark(name, 100000, 20, 5, 3, 10, 1, 100, 5)); // 임의 값
 
         /*if(_shark.ContainsKey("귀상어"))
         {
@@ -27,6 +27,6 @@ public class GameManager : MonoSingleton<GameManager>
         {
             _Shark __shark = pair.Value;
             __shark.Show();
-        }
+        }   
     }
 }
