@@ -41,4 +41,5 @@ public enum _TyIf
     WATERTANK,
     SHARKSHOP,
     COSTBAR,
+    Tab
 };

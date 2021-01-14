@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
+using UnityEngine.SceneManagement;
 
 public class InterfaceManager : MonoBehaviour
 {
@@ -23,7 +24,7 @@ public class InterfaceManager : MonoBehaviour
                         Interface temp = handle.childs[i];
                         RectTransform h = handle.GetComponent<RectTransform>();
                         float moveF = h.localPosition.y - (h.rect.height * (i + 1));
-                        temp.transform.DOLocalMoveY(moveF, 1).SetEase(Ease.OutCubic);
+                        temp.transform.DOLocalMoveY(moveF, 0.5f).SetEase(Ease.OutCubic);
                         usehandle = handle;
                     }
                 }
@@ -34,7 +35,7 @@ public class InterfaceManager : MonoBehaviour
                         Interface temp = handle.childs[i];
                         RectTransform h = handle.GetComponent<RectTransform>();
                         float moveF = h.localPosition.y;
-                        temp.transform.DOLocalMoveY(moveF, 1).SetEase(Ease.OutCubic);
+                        temp.transform.DOLocalMoveY(moveF, 0.5f).SetEase(Ease.OutCubic);
                         usehandle = null;
                     }
                 }

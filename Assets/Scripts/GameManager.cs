@@ -8,6 +8,7 @@ using UnityEngine;
 public class GameManager : MonoSingleton<GameManager>
 {
     public InterfaceManager interfaceManager; // 인터페이스 매니저
+    public Touch touch; // 터치 체크
 
     public Dictionary<string, _SharkData> sharks; // 상어 딕셔너리
     public Dictionary<string, Sprite> sprites; // 이미지 딕셔너리
@@ -21,9 +22,12 @@ public class GameManager : MonoSingleton<GameManager>
 
     void Start()
     {
+        Screen.orientation = ScreenOrientation.Landscape;
+        Screen.fullScreen = true;
         datapath = Application.streamingAssetsPath; // 위치 지정
         spritepath = Application.dataPath + "/Sprites";
-        interfaceManager = gameObject.GetComponent<InterfaceManager>(); // 인터페이스 초기화
+        touch = GetComponent<Touch>(); // 터치 초기화
+        interfaceManager = GetComponent<InterfaceManager>(); // 인터페이스 초기화
         LoadData();
     }
 

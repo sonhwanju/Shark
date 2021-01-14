@@ -8,4 +8,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/main.unity
     guid: bcfb709f3c819f247ad372b312faba46
+  - enabled: 1
+    path: Assets/Scenes/Tab.unity
+    guid: b2c6287ffa560ff418ea8ff206c12004
   m_configObjects: {}
