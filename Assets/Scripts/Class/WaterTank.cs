@@ -6,31 +6,35 @@ using UnityEngine;
 [Serializable]
 public class WaterTank
 {
-    private Shark[] sharks; // 개체 넣어주기 
-    private Part part;
-    private short averageStr; // 평균 스트레스
-    private short volume; // 용량
-    private short waterQuality; //수질 (종에 알맞는 수질인지 아닌지)
+    public Shark[] sharks; // 개체 넣어주기 
+    public Part part; // 부품
+    public short averageStr; // 평균 스트레스
+    public short volume; // 용량
+    public short waterQuality; //수질 (종에 알맞는 수질인지 아닌지)
 }
 
+[Serializable]
 public class Part
 {
-    private _Oxygen oxygen;
-    private _WaterQuality waterQuality;
-    private _Volume volume;
+    public _Oxygen oxygen;
+    public _WaterQuality waterQuality;
+    public _Volume volume;
 }
 
+[Serializable]
 public struct _Oxygen
 {
-    short raiting; //등급s
+    public short raiting; //등급s
 }
 
+[Serializable]
 public struct _WaterQuality
 {
-    short raiting; // 등급
+    public short raiting; // 등급
 }
 
+[Serializable]
 public struct _Volume
 {
-    short size; // 크기
+    public short size; // 크기
 }
