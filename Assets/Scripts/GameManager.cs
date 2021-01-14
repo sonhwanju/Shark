@@ -4,12 +4,15 @@ using System.IO;
 using System;
 using System.Text;
 using UnityEngine;
+using DG.Tweening;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     public InterfaceManager interfaceManager; // 인터페이스 매니저
     public Touch touch; // 터치 체크
 
+    public Money money;
+    public DowNum downum;
     public Dictionary<string, _SharkData> sharks; // 상어 딕셔너리
     public Dictionary<string, Sprite> sprites; // 이미지 딕셔너리
     public Dictionary<string, _Food> foods; // 음식 딕셔너리
@@ -64,6 +67,44 @@ public class GameManager : MonoSingleton<GameManager>
             st.Append(JsonUtility.ToJson(fd));
             st.Append("\n");
         }
+        st.Append("$\n");
+        foreach (string key in waterquality_parts.Keys) // 먹이 저장
+        {
+            _WaterQuality fd;
+            waterquality_parts.TryGetValue(key, out fd);
+            st.Append("{\"key\":\"");
+            st.Append(key);
+            st.Append("\"}|");
+            st.Append(JsonUtility.ToJson(fd));
+            st.Append("\n");
+        }
+        st.Append("$\n");
+        foreach (string key in oxygen_parts.Keys) // 먹이 저장
+        {
+            _Oxygen fd;
+            oxygen_parts.TryGetValue(key, out fd);
+            st.Append("{\"key\":\"");
+            st.Append(key);
+            st.Append("\"}|");
+            st.Append(JsonUtility.ToJson(fd));
+            st.Append("\n");
+        }
+        st.Append("$\n");
+        foreach (string key in volume_parts.Keys) // 먹이 저장
+        {
+            _Volume fd;
+            volume_parts.TryGetValue(key, out fd);
+            st.Append("{\"key\":\"");
+            st.Append(key);
+            st.Append("\"}|");
+            st.Append(JsonUtility.ToJson(fd));
+            st.Append("\n");
+        }
+        st.Append("$\n");
+        st.Append(JsonUtility.ToJson(money));
+        st.Append("|");
+        st.Append(JsonUtility.ToJson(downum));
+        st.Append("\n");
         byte[] bt = Encoding.UTF8.GetBytes(st.ToString());
         File.WriteAllBytes(datapath + "/SaveFile.json", bt);
     }
@@ -76,48 +117,19 @@ public class GameManager : MonoSingleton<GameManager>
         waterquality_parts = new Dictionary<string, _WaterQuality>();
         oxygen_parts = new Dictionary<string, _Oxygen>();
         volume_parts = new Dictionary<string, _Volume>();
+        money = new Money();
+        downum = new DowNum();
         if (File.Exists(datapath + "/DataFile.json")) // 상어 데이터
         {
             byte[] bt = File.ReadAllBytes(datapath + "/DataFile.json");
             string json = Encoding.UTF8.GetString(bt);
-            string[] strs = json.Split('$'); 
-            string[] shark_datas = strs[0].Split('\n');
-            for (int i = 0; i < shark_datas.Length - 1; i++)
+            string[] strs = json.Split('\n'); 
+            for (int i = 0; i < strs.Length - 1; i++)
             {
-                string[] kv = shark_datas[i].Split('|');
+                string[] kv = strs[i].Split('|');
                 string key = kv[0].Substring(8, kv[0].Length - 10);
                 _SharkData value = JsonUtility.FromJson<_SharkData>(kv[1]);
                 sharks[key] = value;
-                LoadSprite(key, value.image);
-            }
-
-            string[] wqs = strs[1].Split('\n');
-            for (int i = 1; i < wqs.Length - 1; i++)
-            {
-                string[] kv = wqs[i].Split('|');
-                string key = kv[0].Substring(8, kv[0].Length - 10);
-                _WaterQuality value = JsonUtility.FromJson<_WaterQuality>(kv[1]);
-                waterquality_parts[key] = value;
-                LoadSprite(key, value.image);
-            }
-
-            string[] oxs = strs[1].Split('\n');
-            for (int i = 1; i < oxs.Length - 1; i++)
-            {
-                string[] kv = oxs[i].Split('|');
-                string key = kv[0].Substring(8, kv[0].Length - 10);
-                _Oxygen value = JsonUtility.FromJson<_Oxygen>(kv[1]);
-                oxygen_parts[key] = value;
-                LoadSprite(key, value.image);
-            }
-
-            string[] vos = strs[1].Split('\n');
-            for (int i = 1; i < vos.Length - 1; i++)
-            {
-                string[] kv = vos[i].Split('|');
-                string key = kv[0].Substring(8, kv[0].Length - 10);
-                _Volume value = JsonUtility.FromJson<_Volume>(kv[1]);
-                volume_parts[key] = value;
                 LoadSprite(key, value.image);
             }
         }
@@ -139,6 +151,40 @@ public class GameManager : MonoSingleton<GameManager>
                 _Food value = JsonUtility.FromJson<_Food>(kv[1]);
                 foods[key] = value;
                 LoadSprite(key, value.image);
+            }
+            string[] wqs = strs[2].Split('\n');
+            for (int i = 1; i < wqs.Length - 1; i++)
+            {
+                string[] kv = wqs[i].Split('|'); 
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _WaterQuality value = JsonUtility.FromJson<_WaterQuality>(kv[1]);
+                waterquality_parts[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] oxs = strs[3].Split('\n');
+            for (int i = 1; i < oxs.Length - 1; i++)
+            {
+                string[] kv = oxs[i].Split('|'); 
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _Oxygen value = JsonUtility.FromJson<_Oxygen>(kv[1]);
+                oxygen_parts[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] vos = strs[4].Split('\n');
+            for (int i = 1; i < vos.Length - 1; i++)
+            {
+                string[] kv = vos[i].Split('|'); 
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _Volume value = JsonUtility.FromJson<_Volume>(kv[1]);
+                volume_parts[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] costs = strs[5].Split('\n');
+            for (int i = 1; i < costs.Length - 1; i++)
+            {
+                string[] kv = costs[i].Split('|'); 
+                money = JsonUtility.FromJson<Money>(kv[0]);
+                downum = JsonUtility.FromJson<DowNum>(kv[1]);
             }
         }
     }

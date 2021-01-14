@@ -27,6 +27,7 @@ public struct _Oxygen
     public string name; // 이름
     public string image; // 이미지 이름
     public short raiting; //등급s
+    public bool buy; // 샀냐
 }
 
 [Serializable]
@@ -35,6 +36,7 @@ public struct _WaterQuality
     public string name; // 이름
     public string image; // 이미지 이름
     public short raiting; // 등급
+    public bool buy; // 샀냐
 }
 
 [Serializable]
@@ -43,4 +45,5 @@ public struct _Volume
     public string name; // 이름
     public string image; // 이미지 이름
     public short size; // 크기
+    public bool buy; // 샀냐
 }

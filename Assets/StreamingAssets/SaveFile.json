@@ -12,3 +12,17 @@ $
 {"key":"문어"}|{"name":"문어","image":"문어.png","count":0}
 {"key":"낙지"}|{"name":"낙지","image":"낙지.png","count":0}
 {"key":"플랑크톤"}|{"name":"플랑크톤","image":"플랑크톤.png","count":0}
+$
+{"key":"등급1 여과기"}|{"name":"등급1 여과기","image":"등급1 여과기.png","raiting":30,"buy":false}
+{"key":"등급2 여과기"}|{"name":"등급2 여과기","image":"등급2 여과기.png","raiting":60,"buy":false}
+{"key":"등급3 여과기"}|{"name":"등급3 여과기","image":"등급3 여과기.png","raiting":110,"buy":false}
+$
+{"key":"등급1 산소통"}|{"name":"등급1 산소통","image":"등급1 산소통.png","raiting":50,"buy":false}
+{"key":"등급2 산소통"}|{"name":"등급2 산소통","image":"등급2 산소통.png","raiting":105,"buy":false}
+{"key":"등급3 산소통"}|{"name":"등급3 산소통","image":"등급3 산소통.png","raiting":200,"buy":false}
+$
+{"key":"등급1 수조"}|{"name":"등급1 수조","image":"등급1 수조.png","size":50,"buy":false}
+{"key":"등급2 수조"}|{"name":"등급2 수조","image":"등급2 수조.png","size":105,"buy":false}
+{"key":"등급3 수조"}|{"name":"등급3 수조","image":"등급3 수조.png","size":200,"buy":false}
+$
+{"money":0}|{"shark1":0,"shark2":0,"shark3":0}

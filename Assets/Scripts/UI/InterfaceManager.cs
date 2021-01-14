@@ -5,10 +5,9 @@ using DG.Tweening;
 
 public class InterfaceManager : MonoBehaviour
 {
-    [SerializeField]
-    Interface[] defaultIf = new Interface[6];
-    [SerializeField]
-    Interface usehandle;
+    public Interface[] defaultIf = new Interface[6];
+    public Interface usehandle;
+
 
 
     public void CallRecieve(Interface handle, _TyIf type)
@@ -23,7 +22,7 @@ public class InterfaceManager : MonoBehaviour
                     {
                         Interface temp = handle.childs[i];
                         RectTransform h = handle.GetComponent<RectTransform>();
-                        float moveF = h.localPosition.y - (h.rect.height * (i + 1));
+                        float moveF = h.localPosition.y - (h.rect.height * 1.07f * (i + 1));
                         temp.transform.DOLocalMoveY(moveF, 0.5f).SetEase(Ease.OutCubic);
                     }
                 }
@@ -39,6 +38,10 @@ public class InterfaceManager : MonoBehaviour
                 }
                 break;
             case _TyIf.PARTSHOP:
+
+                Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tab];
+                tab.transform.DOScale(Vector3.zero, 0.5f).From(false);
+                tab.gameObject.SetActive(true);
 
                 break;
             case _TyIf.COLLECTION:
@@ -69,7 +72,7 @@ public class InterfaceManager : MonoBehaviour
     {
         if (usehandle == null)
         {
-            handle.transform.DOScale(Vector3.one * 1.2f, 0.5f);
+            handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
             usehandle = handle;
         }
         else
@@ -77,7 +80,7 @@ public class InterfaceManager : MonoBehaviour
             usehandle.transform.DOScale(Vector3.one, 0.5f);
             if (usehandle != handle)
             {
-                handle.transform.DOScale(Vector3.one * 1.2f, 0.5f);
+                handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
                 usehandle = handle;
             }
             else
@@ -91,7 +94,7 @@ public enum _DefaultInterface
 {
     _Menu,
     _Costbar,
-    _Sight,
+    _Tab,
     _Tank1,
     _Tank2,
     _Sharkshop

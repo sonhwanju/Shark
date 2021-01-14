@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class TextManaging : MonoBehaviour
 {
-    Text[] texts = new Text[0];
+    public Text[] texts = new Text[0];
 
     public void SetText(int index, string text)
     {
