@@ -1,32 +1,71 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
+using System.IO;
+using System;
+using System.Text;
 using UnityEngine;
 
 public class GameManager : MonoSingleton<GameManager>
 {
     public InterfaceManager interfaceManager;
 
-    Dictionary<string, _Shark> _shark;
+    public Dictionary<string, _SharkData> sharks;
+
+    [SerializeField]
+    private string datapath;
+
     void Start()
     {
+        datapath = Application.streamingAssetsPath + "/DataFile.json";
+        sharks = new Dictionary<string, _SharkData>();
         interfaceManager = gameObject.GetComponent<InterfaceManager>();
+        LoadData();
+    }
 
-        _shark = new Dictionary<string, _Shark>();
-        string name;
+    private void OnApplicationQuit()
+    {
+        SaveData();
+    }
 
-        name = "귀상어"; //임의 값
-        _shark.Add(name, new _Shark(name, 100000, 20, 5, 3, 10, 1, 100, 5)); // 임의 값
-
-        /*if(_shark.ContainsKey("귀상어"))
+    public void SaveData()
+    {
+        StringBuilder st = new StringBuilder();
+        foreach(string key in sharks.Keys)
         {
-            _Shark __shark = _shark["귀상어"];
-            __shark.Show();
-        }*/
-
-        foreach(KeyValuePair<string, _Shark> pair in _shark)
+            _SharkData shark;
+            sharks.TryGetValue(key, out shark);
+            st.Append("{\"key\":");
+            st.Append("\"");
+            st.Append(key);
+            st.Append("\"}|");
+            st.Append(JsonUtility.ToJson(shark));
+            st.Append("\n");
+        }
+        string json = st.ToString();
+        Debug.Log(json);
+        byte[] bt = Encoding.UTF8.GetBytes(json);
+        if (!File.Exists(datapath))
         {
-            _Shark __shark = pair.Value;
-            __shark.Show();
-        }   
+            File.Create(datapath);
+        }
+        File.WriteAllBytes(datapath, bt);
+    }
+
+    public void LoadData()
+    {
+        sharks = new Dictionary<string, _SharkData>();
+        if (File.Exists(datapath))
+        {
+            byte[] bt = File.ReadAllBytes(datapath);
+            string json = Encoding.UTF8.GetString(bt);
+            string[] strs = json.Split('\n');
+            for(int i = 0; i < strs.Length - 1; i++)
+            {
+                string[] kv = strs[i].Split('|');
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _SharkData value = JsonUtility.FromJson<_SharkData>(kv[1]);
+                sharks[key] = value;
+            }
+        }
     }
 }

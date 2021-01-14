@@ -13,15 +13,30 @@ public class InterfaceManager : MonoBehaviour
 
     public void CallRecieve(Interface handle, _TyIf type)
     {
-        usehandle = handle;
-
         switch (type)
         {
             case _TyIf.MENU:
-                for (int i = 0; i < handle.childs.Length; i++)
+                if (usehandle == null)
                 {
-                    Interface temp = handle.childs[i];
-                    temp.gameObject.SetActive(true);
+                    for (int i = 0; i < handle.childs.Length; i++)
+                    {
+                        Interface temp = handle.childs[i];
+                        RectTransform h = handle.GetComponent<RectTransform>();
+                        float moveF = h.localPosition.y - (h.rect.height * (i + 1));
+                        temp.transform.DOLocalMoveY(moveF, 1).SetEase(Ease.OutCubic);
+                        usehandle = handle;
+                    }
+                }
+                else
+                {
+                    for (int i = handle.childs.Length - 1; i > -1; i--)
+                    {
+                        Interface temp = handle.childs[i];
+                        RectTransform h = handle.GetComponent<RectTransform>();
+                        float moveF = h.localPosition.y;
+                        temp.transform.DOLocalMoveY(moveF, 1).SetEase(Ease.OutCubic);
+                        usehandle = null;
+                    }
                 }
                 break;
             case _TyIf.PARTSHOP:

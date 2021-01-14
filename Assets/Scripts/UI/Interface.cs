@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Interface : MonoBehaviour
 {
@@ -14,6 +15,14 @@ public class Interface : MonoBehaviour
     {
         this.parent = parent;
         this.type = type;
+    }
+
+    private void Start()
+    {
+        if (!(GetComponent<Button>() == null))
+        {
+            GetComponent<Button>().onClick.AddListener(Press);
+        }
     }
 
     public void Press()
@@ -31,5 +40,5 @@ public enum _TyIf
     SETTING,
     WATERTANK,
     SHARKSHOP,
-    COSTBAR
+    COSTBAR,
 };
