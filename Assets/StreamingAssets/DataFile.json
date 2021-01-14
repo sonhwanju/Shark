@@ -6,3 +6,15 @@
 {"key":"청상아리"}|{"name":"청상아리","image":"청상아리.png","food":["오징어", "문어","낙지","고등어","갈치","메기","참돔"],"price":100000,"adultTime":6,"stressLimit":8,"special":3,"maxSize":500,"minSize":60,"dowLimit":100,"neWaterQuality":3}
 {"key":"고래상어"}|{"name":"고래상어","image":"고래상어.png","food":["오징어", "문어","낙지","고등어","갈치","메기","참돔","새우","가재","대게","플랑크톤"],"price":350000,"adultTime":20,"stressLimit":10,"special":3,"maxSize":1200,"minSize":60,"dowLimit":50,"neWaterQuality":3}
 {"key":"톱상어"}|{"name":"톱상어","image":"톱상어.png","food":["오징어", "문어","낙지","고등어","갈치","메기","참돔","새우","가재","대게"],"price":50000,"adultTime":5,"stressLimit":6,"special":3,"maxSize":200,"minSize":50,"dowLimit":150,"neWaterQuality":3}
+$
+{"key":"등급1 여과기"}|{"name":"등급1 여과기","image":"등급1 여과기.png","raiting":30}
+{"key":"등급2 여과기"}|{"name":"등급2 여과기","image":"등급2 여과기.png","raiting":60}
+{"key":"등급3 여과기"}|{"name":"등급3 여과기","image":"등급3 여과기.png","raiting":110}
+$
+{"key":"등급1 산소통"}|{"name":"등급1 산소통","image":"등급1 산소통.png","raiting":50}
+{"key":"등급2 산소통"}|{"name":"등급2 산소통","image":"등급2 산소통.png","raiting":105}
+{"key":"등급3 산소통"}|{"name":"등급3 산소통","image":"등급3 산소통.png","raiting":200}
+$
+{"key":"등급1 수조"}|{"name":"등급1 수조","image":"등급1 수조.png","size":50}
+{"key":"등급2 수조"}|{"name":"등급2 수조","image":"등급2 수조.png","size":105}
+{"key":"등급3 수조"}|{"name":"등급3 수조","image":"등급3 수조.png","size":200}

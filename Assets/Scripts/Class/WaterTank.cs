@@ -16,25 +16,31 @@ public class WaterTank
 [Serializable]
 public class Part
 {
-    public _Oxygen oxygen;
-    public _WaterQuality waterQuality;
-    public _Volume volume;
+    public string oxygen;
+    public string waterQuality;
+    public string volume;
 }
 
 [Serializable]
 public struct _Oxygen
 {
+    public string name; // 이름
+    public string image; // 이미지 이름
     public short raiting; //등급s
 }
 
 [Serializable]
 public struct _WaterQuality
 {
+    public string name; // 이름
+    public string image; // 이미지 이름
     public short raiting; // 등급
 }
 
 [Serializable]
 public struct _Volume
 {
+    public string name; // 이름
+    public string image; // 이미지 이름
     public short size; // 크기
 }
