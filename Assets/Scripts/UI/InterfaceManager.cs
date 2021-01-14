@@ -2,22 +2,22 @@
 using System.Collections.Generic;
 using UnityEngine;
 using DG.Tweening;
-using UnityEngine.SceneManagement;
 
 public class InterfaceManager : MonoBehaviour
 {
     [SerializeField]
-    Interface[] defaultIf = new Interface[4];
+    Interface[] defaultIf = new Interface[6];
     [SerializeField]
     Interface usehandle;
 
 
     public void CallRecieve(Interface handle, _TyIf type)
     {
+        SelectButton(handle);
         switch (type)
         {
             case _TyIf.MENU:
-                if (usehandle == null)
+                if (usehandle != null)
                 {
                     for (int i = 0; i < handle.childs.Length; i++)
                     {
@@ -25,7 +25,6 @@ public class InterfaceManager : MonoBehaviour
                         RectTransform h = handle.GetComponent<RectTransform>();
                         float moveF = h.localPosition.y - (h.rect.height * (i + 1));
                         temp.transform.DOLocalMoveY(moveF, 0.5f).SetEase(Ease.OutCubic);
-                        usehandle = handle;
                     }
                 }
                 else
@@ -36,7 +35,6 @@ public class InterfaceManager : MonoBehaviour
                         RectTransform h = handle.GetComponent<RectTransform>();
                         float moveF = h.localPosition.y;
                         temp.transform.DOLocalMoveY(moveF, 0.5f).SetEase(Ease.OutCubic);
-                        usehandle = null;
                     }
                 }
                 break;
@@ -64,9 +62,37 @@ public class InterfaceManager : MonoBehaviour
             case _TyIf.COSTBAR:
 
                 break;
-
         }
-
     }
 
+    public void SelectButton(Interface handle)
+    {
+        if (usehandle == null)
+        {
+            handle.transform.DOScale(Vector3.one * 1.2f, 0.5f);
+            usehandle = handle;
+        }
+        else
+        {
+            usehandle.transform.DOScale(Vector3.one, 0.5f);
+            if (usehandle != handle)
+            {
+                handle.transform.DOScale(Vector3.one * 1.2f, 0.5f);
+                usehandle = handle;
+            }
+            else
+                usehandle = null;
+        }
+    }
+
+}
+
+public enum _DefaultInterface
+{
+    _Menu,
+    _Costbar,
+    _Sight,
+    _Tank1,
+    _Tank2,
+    _Sharkshop
 }
