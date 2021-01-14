@@ -1,5 +1,14 @@
 {"sharks":[],"part":{"oxygen":{"raiting":0},"waterQuality":{"raiting":0},"volume":{"size":0}},"averageStr":0,"volume":0,"waterQuality":0}
 {"sharks":[],"part":{"oxygen":{"raiting":0},"waterQuality":{"raiting":0},"volume":{"size":0}},"averageStr":0,"volume":0,"waterQuality":0}
 $
-{"key":"오리"}|{"name":"오리","image":"오리.png","count":0}
-{"key":"상어"}|{"name":"상어","image":"상어.png","count":1}
+{"key":"고등어"}|{"name":"고등어","image":"고등어.png","count":0}
+{"key":"갈치"}|{"name":"갈치","image":"갈치.png","count":0}
+{"key":"메기"}|{"name":"메기","image":"메기.png","count":0}
+{"key":"참돔"}|{"name":"참돔","image":"참돔.png","count":0}
+{"key":"새우"}|{"name":"새우","image":"새우.png","count":0}
+{"key":"가재"}|{"name":"가재","image":"가재.png","count":0}
+{"key":"대게"}|{"name":"대게","image":"대게.png","count":0}
+{"key":"오징어"}|{"name":"오징어","image":"오징어.png","count":0}
+{"key":"문어"}|{"name":"문어","image":"문어.png","count":0}
+{"key":"낙지"}|{"name":"낙지","image":"낙지.png","count":0}
+{"key":"플랑크톤"}|{"name":"플랑크톤","image":"플랑크톤.png","count":0}
