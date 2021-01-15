@@ -189,6 +189,18 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
+    public void ResetData()
+    {
+        if (File.Exists(datapath + "/DefaultSaveFile.json"))
+        {
+            byte[] bt = File.ReadAllBytes(datapath + "/DefaultSaveFile.json");
+            if (!(File.Exists(datapath + "/SaveFile.json")))
+                File.Create(datapath + "/SaveFile.json");
+            File.WriteAllBytes(datapath + "/SaveFile.json", bt);
+        }
+        LoadData();
+    }
+
     private void LoadSprite(string key, string filename)
     {
         if (File.Exists(spritepath + "/" + filename))
