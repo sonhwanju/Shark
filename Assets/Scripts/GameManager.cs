@@ -10,6 +10,7 @@ public class GameManager : MonoSingleton<GameManager>
 {
     public InterfaceManager interfaceManager; // 인터페이스 매니저
     public Touch touch; // 터치 체크
+    public bool isSea = false;
 
     public Money money;
     public DowNum downum;
