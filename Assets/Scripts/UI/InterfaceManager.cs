@@ -40,37 +40,38 @@ public class InterfaceManager : MonoBehaviour
                 break;
             case _TyIf.PARTSHOP:
 
-                OpenTab();
+                OpenDefaultTab();
                 break;
             case _TyIf.COLLECTION:
 
-                OpenTab();
+                OpenDefaultTab();
                 break;
             case _TyIf.INVENTORY:
 
-                OpenTab();
+                OpenDefaultTab();
                 break;
             case _TyIf.HELP:
 
-                OpenTab();
+                OpenDefaultTab();
                 break;
             case _TyIf.SETTING:
 
-                OpenTab();
+                OpenDefaultTab();
                 break;
             case _TyIf.WATERTANK:
+
 
                 break;
             case _TyIf.SHARKSHOP:
 
-                OpenTab();
+
                 break;
         }
     }
 
     public void SelectButton(Interface handle)
     {
-        CloseTab();
+        CloseDefaultTab();
         if (usehandle == null)
         {
             handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
@@ -89,7 +90,7 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
-    public void OpenTab()
+    public void OpenDefaultTab()
     {
         if (usehandle != null)
         {
@@ -99,7 +100,7 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
-    public void CloseTab()
+    public void CloseDefaultTab()
     {
         Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tab];
         tab.transform.DOScale(Vector2.zero, 1f).SetEase(Ease.OutQuint);
