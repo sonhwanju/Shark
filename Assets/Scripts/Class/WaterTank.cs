@@ -27,6 +27,7 @@ public struct _Oxygen
     public string name; // 이름
     public string image; // 이미지 이름
     public short raiting; //등급s
+    public short price; // 가격
     public bool buy; // 샀냐
 }
 
@@ -36,6 +37,7 @@ public struct _WaterQuality
     public string name; // 이름
     public string image; // 이미지 이름
     public short raiting; // 등급
+    public short price; // 가격
     public bool buy; // 샀냐
 }
 
@@ -45,5 +47,6 @@ public struct _Volume
     public string name; // 이름
     public string image; // 이미지 이름
     public short size; // 크기
+    public short price; // 가격
     public bool buy; // 샀냐
 }

@@ -9,6 +9,7 @@ public class Interface : MonoBehaviour
     [SerializeField]
     private _TyIf type;
     public Interface parent;
+    public string subtype;
 
 
     public Interface(Interface parent, _TyIf type)
@@ -21,7 +22,8 @@ public class Interface : MonoBehaviour
     {
         if (!(GetComponent<Button>() == null))
         {
-            GetComponent<Button>().onClick.AddListener(Press);
+            if (type != _TyIf.TAB)
+                GetComponent<Button>().onClick.AddListener(Press);
         }
     }
 
@@ -29,6 +31,7 @@ public class Interface : MonoBehaviour
     {
         GameManager.Instance.interfaceManager.CallRecieve(this, type);
     }
+
 }
 public enum _TyIf
 {

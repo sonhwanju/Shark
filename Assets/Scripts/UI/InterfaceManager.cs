@@ -1,18 +1,26 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using DG.Tweening;
 
 public class InterfaceManager : MonoBehaviour
 {
     public Interface[] defaultIf = new Interface[6];
     public Interface usehandle;
+    public GameObject tabhandle;
 
 
 
     public void CallRecieve(Interface handle, _TyIf type)
     {
         SelectButton(handle);
+        CloseDefaultTab();
+        if (tabhandle != null)
+        {
+            tabhandle.SetActive(false);
+            tabhandle = null;
+        }
         switch (type)
         {
             case _TyIf.MENU:
@@ -40,23 +48,28 @@ public class InterfaceManager : MonoBehaviour
                 break;
             case _TyIf.PARTSHOP:
 
-                OpenDefaultTab();
+                OpenTab(handle);
+
                 break;
             case _TyIf.COLLECTION:
 
-                OpenDefaultTab();
+                OpenTab(handle);
+
                 break;
             case _TyIf.INVENTORY:
 
-                OpenDefaultTab();
+                OpenTab(handle);
+
                 break;
             case _TyIf.HELP:
 
-                OpenDefaultTab();
+                OpenTab(handle);
+
                 break;
             case _TyIf.SETTING:
 
-                OpenDefaultTab();
+                OpenTab(handle);
+
                 break;
             case _TyIf.WATERTANK:
 
@@ -69,9 +82,9 @@ public class InterfaceManager : MonoBehaviour
         }
     }
 
+
     public void SelectButton(Interface handle)
     {
-        CloseDefaultTab();
         if (usehandle == null)
         {
             handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
@@ -86,7 +99,19 @@ public class InterfaceManager : MonoBehaviour
                 usehandle = handle;
             }
             else
+            {
                 usehandle = null;
+            }
+        }
+    }
+
+    public void OpenTab(Interface handle)
+    {
+        if (tabhandle == null)
+        {
+            tabhandle = handle.childs[0].transform.parent.gameObject;
+            tabhandle.SetActive(true);
+            OpenDefaultTab();
         }
     }
 

@@ -4,7 +4,7 @@ using System.IO;
 using System;
 using System.Text;
 using UnityEngine;
-using DG.Tweening;
+using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -32,7 +32,7 @@ public class GameManager : MonoSingleton<GameManager>
         Screen.orientation = ScreenOrientation.Landscape;
         Screen.fullScreen = true;
         datapath = Application.streamingAssetsPath; // 위치 지정
-        spritepath = Application.dataPath + "/Sprites";
+        spritepath = Application.dataPath + "/Resources/Sprites";
         touch = GetComponent<Touch>(); // 터치 초기화
         interfaceManager = GetComponent<InterfaceManager>(); // 인터페이스 초기화
         LoadData();
@@ -204,10 +204,9 @@ public class GameManager : MonoSingleton<GameManager>
 
     private void LoadSprite(string key, string filename)
     {
-        if (File.Exists(spritepath + "/" + filename))
+        if (File.Exists(spritepath + "/" + filename + ".png"))
         {
-            Sprite tempsp = (Sprite)Resources.Load(spritepath + "/" + filename);
-            sprites[key] = tempsp;
+            sprites[key] = Resources.Load<Sprite>("Sprites/" + filename);
         }
     } // 이미지 불러오기
 }

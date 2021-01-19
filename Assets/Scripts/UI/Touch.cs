@@ -12,6 +12,7 @@ public class Touch : MonoBehaviour
 
     [SerializeField]
     private Image blackout;
+    private bool nyan = true;
 
     Queue<bool> TouchQueue;
 
@@ -32,46 +33,58 @@ public class Touch : MonoBehaviour
             endposition = Input.mousePosition;
         }
 
-
-        if (GameManager.Instance.isSea)
+        if (nyan)
         {
-            if ((startposition.x > Screen.width / 5 * 4) && (endposition.x > Screen.width / 5 * 2))
+            if (GameManager.Instance.isSea)
             {
-                if ((startposition.x > endposition.x) && (GameManager.Instance.interfaceManager.usehandle == null))
+                if ((startposition.x > Screen.width / 5 * 4) && (endposition.x > Screen.width / 5 * 2))
                 {
-                    blackout.gameObject.SetActive(true);
-                    blackout.DOFade(1f, 0.5f).OnComplete(()=> {
-                        GameObject obj = GameManager.Instance.transform.GetChild(0).gameObject;
-                        obj.transform.localPosition = new Vector3(0, 0, -10);
-                        GameManager.Instance.isSea = false;
-                        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].gameObject.SetActive(true);
-                        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].gameObject.SetActive(true);
-                        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].gameObject.SetActive(false);
-                        GameManager.Instance.interfaceManager.usehandle = null;
-                        blackout.DOFade(0, 0.5f);
-                        blackout.gameObject.SetActive(false);
-                    });
+                    if (((startposition.x - endposition.x) > Screen.width / 10) && (GameManager.Instance.interfaceManager.usehandle == null))
+                    {
+                        blackout.gameObject.SetActive(true);
+                        blackout.DOFade(1f, 0.5f).OnComplete(() =>
+                        {
+                            nyan = false;
+                            GameObject obj = GameManager.Instance.transform.GetChild(0).gameObject;
+                            obj.transform.localPosition = new Vector3(0, 0, -10);
+                            GameManager.Instance.isSea = false;
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].gameObject.SetActive(true);
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].gameObject.SetActive(true);
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].gameObject.SetActive(false);
+                            GameManager.Instance.interfaceManager.usehandle = null;
+                            blackout.DOFade(0, 0.5f).OnComplete(() =>
+                            {
+                                nyan = true;
+                            });
+                            blackout.gameObject.SetActive(false);
+                        });
+                    }
                 }
             }
-        }
-        else
-        {
-            if ((startposition.x < Screen.width / 5) && (endposition.x < Screen.width / 5 * 3))
+            else
             {
-                if ((startposition.x < endposition.x) && (GameManager.Instance.interfaceManager.usehandle == null))
+                if ((startposition.x < Screen.width / 5) && (endposition.x < Screen.width / 5 * 3))
                 {
-                    blackout.gameObject.SetActive(true);
-                    blackout.DOFade(1f, 0.5f).OnComplete(() => {
-                        GameObject obj = GameManager.Instance.transform.GetChild(0).gameObject;
-                        obj.transform.localPosition = new Vector3(-20, 0, -10);
-                        GameManager.Instance.isSea = true;
-                        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].gameObject.SetActive(false);
-                        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].gameObject.SetActive(false);
-                        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].gameObject.SetActive(true);
-                        GameManager.Instance.interfaceManager.usehandle = null;
-                        blackout.DOFade(0, 0.5f);
-                        blackout.gameObject.SetActive(false);
-                    });
+                    if (((endposition.x - startposition.x) > Screen.width / 10) && (GameManager.Instance.interfaceManager.usehandle == null))
+                    {
+                        blackout.gameObject.SetActive(true);
+                        blackout.DOFade(1f, 0.5f).OnComplete(() =>
+                        {
+                            nyan = false;
+                            GameObject obj = GameManager.Instance.transform.GetChild(0).gameObject;
+                            obj.transform.localPosition = new Vector3(-20, 0, -10);
+                            GameManager.Instance.isSea = true;
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].gameObject.SetActive(false);
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].gameObject.SetActive(false);
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].gameObject.SetActive(true);
+                            GameManager.Instance.interfaceManager.usehandle = null;
+                            blackout.DOFade(0, 0.5f).OnComplete(() =>
+                            {
+                                nyan = true;
+                            });
+                            blackout.gameObject.SetActive(false);
+                        });
+                    }
                 }
             }
         }
