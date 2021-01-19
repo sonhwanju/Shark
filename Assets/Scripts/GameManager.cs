@@ -4,7 +4,6 @@ using System.IO;
 using System;
 using System.Text;
 using UnityEngine;
-using UnityEngine.UI;
 
 public class GameManager : MonoSingleton<GameManager>
 {
@@ -15,8 +14,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Money money;
     public DowNum downum;
     public Dictionary<string, _SharkData> sharks; // 상어 딕셔너리
-    public Dictionary<string, Sprite> sprites; // 이미지 딕셔너리
-    public Dictionary<string, _Food> foods; // 음식 딕셔너리
+    public Dictionary<string, Sprite> sprites; // 이미지 딕셔너리 귀상어
+    public Dictionary<string, _Food> foods; // 음식 딕셔너리 
     public Dictionary<string, _WaterQuality> waterquality_parts; // 수질 딕셔너리
     public Dictionary<string, _Oxygen> oxygen_parts; // 산소 딕셔너리
     public Dictionary<string, _Volume> volume_parts; // 용량 딕셔너리
