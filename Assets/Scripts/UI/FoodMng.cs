@@ -4,13 +4,26 @@ using UnityEngine;
 
 public class FoodMng : MonoBehaviour
 {
-    private bool able = true;
+    private bool able;
+    private int t;
+    [SerializeField] int rechargeTime=300;
+
+    private void Start()
+    {
+        if (PlayerPrefs.HasKey("T"))
+            t = PlayerPrefs.GetInt("T");
+        able = t != 0 ? false : true;
+
+        if (!able) StartCoroutine(Recharge());
+    }
 
     public void ClickFoodBox()
     {
         if (able)
         {
-            StartCoroutine(Reuse());
+            able = false;
+            t = rechargeTime;
+            StartCoroutine(Recharge());
             int r = Random.Range(1, 101);
 
             if (r <= 15)
@@ -54,12 +67,28 @@ public class FoodMng : MonoBehaviour
                 GameManager.Instance.foods["낙지"].count++;
             }
         }
+        else
+        {
+            //남은 시간
+        }
     }
 
-    IEnumerator Reuse()
+    IEnumerator Recharge()
     {
-        able = false;
-        yield return new WaitForSeconds(300);
-        able = true;
+        for(;;)
+        {
+            yield return new WaitForSeconds(1);
+            t--;
+
+            if (t == 0)
+            {
+                able = true;
+                break;
+            }
+        }
     }
+
+    private void OnApplicationQuit() => PlayerPrefs.SetInt("T", t);
+
+    //public void TestFunc() => PlayerPrefs.DeleteKey("T");
 }
