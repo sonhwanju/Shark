@@ -11,7 +11,9 @@ public class SharkPlus : MonoBehaviour
             //귀상어 추가
             for (int i = 0; i < GameManager.Instance.watertank[0].sharks.Length; i++)
             {
-                GameManager.Instance.watertank[0].sharks[i] = 
+                //GameManager.Instance.watertank[0].sharks[i] = 
+                //모르겟서요
+
             }
         }
         else if(GameManager.Instance.watertank[0].sharks[0].name == "귀상어") // 수조에 똑같은 상어가 있다면
