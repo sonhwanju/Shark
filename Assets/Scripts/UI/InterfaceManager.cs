@@ -49,6 +49,7 @@ public class InterfaceManager : MonoBehaviour
             case _TyIf.PARTSHOP:
 
                 OpenTab(handle);
+                SetScrollCategory(handle.childs[0], Item_Ty._WaterQuality);
 
                 break;
             case _TyIf.COLLECTION:
@@ -80,6 +81,13 @@ public class InterfaceManager : MonoBehaviour
 
                 break;
         }
+    }
+
+    public void SetScrollCategory(Interface handle, Item_Ty type)
+    {
+        ScrollManaging sm = handle.GetComponent<ScrollManaging>();
+        sm.type = type;
+        handle.GetComponent<ScrollManaging>().ItemLoad();
     }
 
 
