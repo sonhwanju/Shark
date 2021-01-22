@@ -7,6 +7,7 @@ public class Category : MonoBehaviour
 {
     public Interface scroll;
     public Item_Ty type;
+    public Sprite[] sprites;
 
     public void Start()
     {
@@ -20,7 +21,7 @@ public class Category : MonoBehaviour
     {
         ScrollManaging sm = scroll.GetComponent<ScrollManaging>();
         sm.type = type;
-        scroll.GetComponent<ScrollManaging>().ItemLoad();
+        scroll.GetComponent<ScrollManaging>().ItemMake();
     }
 
 }

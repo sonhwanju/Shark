@@ -87,7 +87,7 @@ public class InterfaceManager : MonoBehaviour
     {
         ScrollManaging sm = handle.GetComponent<ScrollManaging>();
         sm.type = type;
-        handle.GetComponent<ScrollManaging>().ItemLoad();
+        handle.GetComponent<ScrollManaging>().ItemMake();
     }
 
 

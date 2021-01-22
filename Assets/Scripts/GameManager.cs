@@ -24,13 +24,16 @@ public class GameManager : MonoSingleton<GameManager>
     [SerializeField]
     private string datapath; //불러오기 위치
     [SerializeField]
+    private string savepath; //저장/불러오기 위치
+    [SerializeField]
     private string spritepath; // 이미지 데이터 위치
 
     void Start()
     {
         Screen.orientation = ScreenOrientation.Landscape;
         Screen.fullScreen = true;
-        datapath = Application.streamingAssetsPath; // 위치 지정
+        datapath = Application.dataPath + "/Resources/Files"; // 위치 지정
+        savepath = Application.persistentDataPath; // 위치 지정
         spritepath = Application.dataPath + "/Resources/Sprites";
         touch = GetComponent<Touch>(); // 터치 초기화
         interfaceManager = GetComponent<InterfaceManager>(); // 인터페이스 초기화
@@ -44,11 +47,6 @@ public class GameManager : MonoSingleton<GameManager>
 
     public void SaveData() 
     {
-        if (!File.Exists(datapath + "/SaveFile.json"))
-        {
-            File.Create(datapath + "/SaveFile.json");
-        }
-
         StringBuilder st = new StringBuilder();
 
         for (int i = 0; i < watertank.Length; i++) // 수조 저장
@@ -106,7 +104,7 @@ public class GameManager : MonoSingleton<GameManager>
         st.Append(JsonUtility.ToJson(downum));
         st.Append("\n");
         byte[] bt = Encoding.UTF8.GetBytes(st.ToString());
-        File.WriteAllBytes(datapath + "/SaveFile.json", bt);
+        File.WriteAllBytes(savepath + "/SaveFile.json", bt);
     }
 
     public void LoadData() // 상어 데이터 불러오기
@@ -119,10 +117,11 @@ public class GameManager : MonoSingleton<GameManager>
         volume_parts = new Dictionary<string, _Volume>();
         money = new Money();
         downum = new DowNum();
+
         if (File.Exists(datapath + "/DataFile.json")) // 상어 데이터
         {
-            byte[] bt = File.ReadAllBytes(datapath + "/DataFile.json");
-            string json = Encoding.UTF8.GetString(bt);
+            TextAsset ta = Resources.Load<TextAsset>("Files/DataFile");
+            string json = ta.ToString();
             string[] strs = json.Split('\n'); 
             for (int i = 0; i < strs.Length - 1; i++)
             {
@@ -133,9 +132,9 @@ public class GameManager : MonoSingleton<GameManager>
                 LoadSprite(key, value.image);
             }
         }
-        if (File.Exists(datapath + "/SaveFile.json")) // 수조 & 음식 데이터
+        if (File.Exists(savepath + "/SaveFile.json")) // 수조 & 음식 데이터
         {
-            byte[] bt = File.ReadAllBytes(datapath + "/SaveFile.json");
+            byte[] bt = File.ReadAllBytes(savepath + "/SaveFile.json");
             string json = Encoding.UTF8.GetString(bt);
             string[] strs = json.Split('$');
             string[] tank = strs[0].Split('\n');
@@ -187,21 +186,71 @@ public class GameManager : MonoSingleton<GameManager>
                 downum = JsonUtility.FromJson<DowNum>(kv[1]);
             }
         }
+        else
+        {
+            ResetData();
+        }
     }
 
     public void ResetData()
     {
         if (File.Exists(datapath + "/DefaultSaveFile.json"))
         {
-            byte[] bt = File.ReadAllBytes(datapath + "/DefaultSaveFile.json");
-            if (!(File.Exists(datapath + "/SaveFile.json")))
-                File.Create(datapath + "/SaveFile.json");
-            File.WriteAllBytes(datapath + "/SaveFile.json", bt);
+            TextAsset ta = Resources.Load<TextAsset>("Files/DefaultSaveFile");
+            string json = ta.ToString();
+            string[] strs = json.Split('$');
+            string[] tank = strs[0].Split('\n');
+            for (int i = 0; i < tank.Length - 1; i++)
+            {
+                watertank[i] = JsonUtility.FromJson<WaterTank>(tank[i]);
+            }
+            string[] food = strs[1].Split('\n');
+            for (int i = 1; i < food.Length - 1; i++)
+            {
+                string[] kv = food[i].Split('|');
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _Food value = JsonUtility.FromJson<_Food>(kv[1]);
+                foods[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] wqs = strs[2].Split('\n');
+            for (int i = 1; i < wqs.Length - 1; i++)
+            {
+                string[] kv = wqs[i].Split('|');
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _WaterQuality value = JsonUtility.FromJson<_WaterQuality>(kv[1]);
+                waterquality_parts[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] oxs = strs[3].Split('\n');
+            for (int i = 1; i < oxs.Length - 1; i++)
+            {
+                string[] kv = oxs[i].Split('|');
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _Oxygen value = JsonUtility.FromJson<_Oxygen>(kv[1]);
+                oxygen_parts[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] vos = strs[4].Split('\n');
+            for (int i = 1; i < vos.Length - 1; i++)
+            {
+                string[] kv = vos[i].Split('|');
+                string key = kv[0].Substring(8, kv[0].Length - 10);
+                _Volume value = JsonUtility.FromJson<_Volume>(kv[1]);
+                volume_parts[key] = value;
+                LoadSprite(key, value.image);
+            }
+            string[] costs = strs[5].Split('\n');
+            for (int i = 1; i < costs.Length - 1; i++)
+            {
+                string[] kv = costs[i].Split('|');
+                money = JsonUtility.FromJson<Money>(kv[0]);
+                downum = JsonUtility.FromJson<DowNum>(kv[1]);
+            }
         }
-        LoadData();
     }
 
-    private void LoadSprite(string key, string filename)
+        private void LoadSprite(string key, string filename)
     {
         if (File.Exists(spritepath + "/" + filename + ".png"))
         {

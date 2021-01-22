@@ -6,9 +6,10 @@ using UnityEngine.UI;
 public class ScrollManaging : MonoBehaviour
 {
     public List<ScrollItem> items;
+    public Category[] categories;
     public Item_Ty type;
     public float length = 1000;
-    public GameObject item_clone;
+    public GameObject[] item_clone;
 
     private void Update()
     {
@@ -28,11 +29,88 @@ public class ScrollManaging : MonoBehaviour
 
     public void ItemMake()
     {
-
+        int length;
+        int index;
+        int num;
+        switch (type)
+        {
+            case Item_Ty._WaterQuality:
+                length = GameManager.Instance.waterquality_parts.Keys.Count;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(600, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
+                break;
+            case Item_Ty._Oxygen:
+                length = GameManager.Instance.oxygen_parts.Keys.Count;
+                index = items.Count; 
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(600, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
+                break;
+            case Item_Ty._Volume:
+                length = GameManager.Instance.volume_parts.Keys.Count;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(600, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
+                break;
+            case Item_Ty._Collection:
+                break;
+            case Item_Ty._Inventory:
+                break;
+            case Item_Ty._Tank1:
+                break;
+            case Item_Ty._Tank2:
+                break;
+            case Item_Ty._SharkShop:
+                break;
+        }
+        ItemLoad();
     }
 
     public void ItemLoad()
     {
+        GetComponent<ScrollRect>().content.transform.localPosition = Vector3.zero;
         int i = 0;
         switch (type)
         {
@@ -45,6 +123,7 @@ public class ScrollManaging : MonoBehaviour
                     items[i].price.text = "가격 " + wq.price + "$";
                     i++;
                 }
+                CategorySelect();
                 break;
             case Item_Ty._Oxygen:
                 foreach (string key in GameManager.Instance.oxygen_parts.Keys)
@@ -55,6 +134,7 @@ public class ScrollManaging : MonoBehaviour
                     items[i].price.text = "가격 " + ox.price + "$";
                     i++;
                 }
+                CategorySelect();
                 break;
             case Item_Ty._Volume:
                 foreach (string key in GameManager.Instance.volume_parts.Keys)
@@ -65,6 +145,7 @@ public class ScrollManaging : MonoBehaviour
                     items[i].price.text = "가격 " + vo.price + "$";
                     i++;
                 }
+                CategorySelect();
                 break;
             case Item_Ty._Collection:
                 break;
@@ -75,6 +156,27 @@ public class ScrollManaging : MonoBehaviour
             case Item_Ty._Tank2:
                 break;
             case Item_Ty._SharkShop:
+                break;
+        }
+    }
+
+    public void CategorySelect()
+    {
+        for (int i = 0; i < categories.Length; i++)
+        {
+            categories[i].GetComponent<Image>().sprite = categories[i].sprites[0];
+        }
+
+        switch (type)
+        {
+            case Item_Ty._WaterQuality:
+                categories[0].GetComponent<Image>().sprite = categories[0].sprites[1];
+                break;
+            case Item_Ty._Oxygen:
+                categories[1].GetComponent<Image>().sprite = categories[1].sprites[1];
+                break;
+            case Item_Ty._Volume:
+                categories[2].GetComponent<Image>().sprite = categories[2].sprites[1];
                 break;
         }
     }
