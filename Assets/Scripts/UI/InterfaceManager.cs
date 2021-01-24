@@ -55,11 +55,13 @@ public class InterfaceManager : MonoBehaviour
             case _TyIf.COLLECTION:
 
                 OpenTab(handle);
+                SetScrollCategory(handle.childs[0], Item_Ty._Collection);
 
                 break;
             case _TyIf.INVENTORY:
 
                 OpenTab(handle);
+                SetScrollCategory(handle.childs[0], Item_Ty._Inventory);
 
                 break;
             case _TyIf.HELP:

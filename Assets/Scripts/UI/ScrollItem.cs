@@ -9,5 +9,5 @@ public class ScrollItem : MonoBehaviour
 {
     public Image image;
     public Text itemname;
-    public Text price;
+    public Text content;
 }

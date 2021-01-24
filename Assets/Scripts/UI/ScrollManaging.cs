@@ -95,8 +95,44 @@ public class ScrollManaging : MonoBehaviour
                 }
                 break;
             case Item_Ty._Collection:
+                length = GameManager.Instance.sharks.Keys.Count;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(600, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
                 break;
             case Item_Ty._Inventory:
+                length = GameManager.Instance.foods.Keys.Count;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(100 + 250 * (index % 5), -(index / 5) * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
                 break;
             case Item_Ty._Tank1:
                 break;
@@ -120,7 +156,7 @@ public class ScrollManaging : MonoBehaviour
                     _WaterQuality wq = GameManager.Instance.waterquality_parts[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = wq.name;
-                    items[i].price.text = "가격 " + wq.price + "$";
+                    items[i].content.text = "가격 " + wq.price + "$";
                     i++;
                 }
                 CategorySelect();
@@ -131,7 +167,7 @@ public class ScrollManaging : MonoBehaviour
                     _Oxygen ox = GameManager.Instance.oxygen_parts[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = ox.name;
-                    items[i].price.text = "가격 " + ox.price + "$";
+                    items[i].content.text = "가격 " + ox.price + "$";
                     i++;
                 }
                 CategorySelect();
@@ -142,14 +178,29 @@ public class ScrollManaging : MonoBehaviour
                     _Volume vo = GameManager.Instance.volume_parts[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = vo.name;
-                    items[i].price.text = "가격 " + vo.price + "$";
+                    items[i].content.text = "가격 " + vo.price + "$";
                     i++;
                 }
                 CategorySelect();
                 break;
             case Item_Ty._Collection:
+                foreach (string key in GameManager.Instance.sharks.Keys)
+                {
+                    _SharkData sd = GameManager.Instance.sharks[key];
+                    items[i].image.sprite = GameManager.Instance.sprites[key];
+                    items[i].itemname.text = sd.name;
+                    items[i].content.text = "등급 " + sd.special;
+                    i++;
+                }
                 break;
             case Item_Ty._Inventory:
+                foreach (string key in GameManager.Instance.foods.Keys)
+                {
+                    
+                    _Food fd = GameManager.Instance.foods[key];
+                    items[i].image.sprite = GameManager.Instance.sprites[key];
+                    i++;
+                }
                 break;
             case Item_Ty._Tank1:
                 break;
