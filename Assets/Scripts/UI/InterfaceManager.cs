@@ -66,8 +66,6 @@ public class InterfaceManager : MonoBehaviour
                 break;
             case _TyIf.HELP:
 
-                OpenTab(handle);
-
                 break;
             case _TyIf.SETTING:
 
@@ -75,11 +73,15 @@ public class InterfaceManager : MonoBehaviour
 
                 break;
             case _TyIf.WATERTANK:
-
+                OpenSpecialTab();
+                tabhandle = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject;
+                tabhandle.SetActive(true);
 
                 break;
             case _TyIf.SHARKSHOP:
-
+                OpenSpecialTab();
+                tabhandle = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject;
+                tabhandle.SetActive(true);
 
                 break;
         }
@@ -141,6 +143,15 @@ public class InterfaceManager : MonoBehaviour
         tab.transform.DOScale(Vector2.zero, 1f).SetEase(Ease.OutQuint);
     }
 
+    public void OpenSpecialTab()
+    {
+        if (usehandle != null)
+        {
+            Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab];
+            tab.transform.localScale = Vector2.one;
+            tab.transform.DOScale(Vector2.zero, 1f).From(false).SetEase(Ease.OutQuint);
+        }
+    }
 }
 
 public enum _DefaultInterface
@@ -150,5 +161,6 @@ public enum _DefaultInterface
     _Tab,
     _Tank1,
     _Tank2,
-    _Sharkshop
+    _Sharkshop,
+    _SpecialTab
 }

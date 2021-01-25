@@ -6,7 +6,7 @@ using UnityEngine;
 [Serializable]
 public class WaterTank
 {
-    public Shark[] sharks; // 개체 넣어주기 
+    public List<Shark> sharks; // 개체 넣어주기 
     public Part part; // 부품
     public short averageStr; // 평균 스트레스
     public short volume; // 용량

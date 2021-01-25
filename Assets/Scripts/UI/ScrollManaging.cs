@@ -199,6 +199,7 @@ public class ScrollManaging : MonoBehaviour
                     
                     _Food fd = GameManager.Instance.foods[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
+                    items[i].content.text = fd.count.ToString();
                     i++;
                 }
                 break;
