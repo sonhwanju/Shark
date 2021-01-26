@@ -118,6 +118,7 @@ public class GameManager : MonoSingleton<GameManager>
         sharks = new Dictionary<string, _SharkData>();
         foods = new Dictionary<string, _Food>();
         sprites = new Dictionary<string, Sprite>();
+        contents = new Dictionary<string, string>();
         waterquality_parts = new Dictionary<string, _WaterQuality>();
         oxygen_parts = new Dictionary<string, _Oxygen>();
         volume_parts = new Dictionary<string, _Volume>();
@@ -136,7 +137,7 @@ public class GameManager : MonoSingleton<GameManager>
                 _SharkData value = JsonUtility.FromJson<_SharkData>(kv[1]);
                 sharks[key] = value;
                 LoadSprite(key, value.image);
-                LoadContent(key, value.name);
+                LoadContent(key, key);
             }
         }
         if (File.Exists(savepath + "/SaveFile.json")) // 수조 & 음식 데이터
