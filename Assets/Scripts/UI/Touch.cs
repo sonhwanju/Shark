@@ -14,13 +14,6 @@ public class Touch : MonoBehaviour
     private Image blackout;
     private bool nyan = true;
 
-    Queue<bool> TouchQueue;
-
-    private void Start()
-    {
-        TouchQueue = new Queue<bool>(5);
-    }
-
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
@@ -89,5 +82,20 @@ public class Touch : MonoBehaviour
             }
         }
 
+        if (GameManager.Instance.interfaceManager.tabhandle == GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject)
+        {
+            if ((endposition.y < Screen.height / 5 * 4) && (startposition.y < Screen.height / 5 * 2))
+            {
+                if ((endposition.y - startposition.y) > Screen.height / 10)
+                {
+                    Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab];
+                    tab.transform.DOScale(Vector2.zero, 1f).SetEase(Ease.OutQuint);
+                    GameManager.Instance.interfaceManager.usehandle.transform.DOScale(Vector3.one, 0.5f);
+                    GameManager.Instance.interfaceManager.usehandle = null;
+                    startposition = new Vector2(float.NaN, float.NaN);
+                    endposition = new Vector2(float.NaN, float.NaN);
+                }
+            }
+        }
     }
 }
