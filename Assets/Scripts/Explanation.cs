@@ -5,6 +5,7 @@ using UnityEngine.UI;
 
 public class Explanation : MonoBehaviour
 {
+    public GameObject clone;
     public GameObject exPanel;
     public Text exText;
 
@@ -12,7 +13,8 @@ public class Explanation : MonoBehaviour
 
     private void Start()
     {
-        exPanel.SetActive(false);
+        if (exPanel != null)
+            exPanel.SetActive(false);
     }
 
     public void Touch()

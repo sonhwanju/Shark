@@ -82,9 +82,9 @@ public class Touch : MonoBehaviour
             }
         }
 
-        if (GameManager.Instance.interfaceManager.tabhandle == GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject)
+        if ((GameManager.Instance.interfaceManager.tabhandle == GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[0].transform.parent.gameObject) || (GameManager.Instance.interfaceManager.tabhandle == GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[0].transform.parent.gameObject) || (GameManager.Instance.interfaceManager.tabhandle == GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].childs[0].transform.parent.gameObject))
         {
-            if ((endposition.y < Screen.height / 5 * 4) && (startposition.y < Screen.height / 5 * 2))
+            if ((endposition.y < Screen.height / 5 * 2) && (startposition.y < Screen.height / 5 * 1))
             {
                 if ((endposition.y - startposition.y) > Screen.height / 10)
                 {

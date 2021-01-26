@@ -76,16 +76,15 @@ public class InterfaceManager : MonoBehaviour
                 tabhandle = handle.childs[0].transform.parent.gameObject;
                 tabhandle.SetActive(true);
                 OpenSpecialTab();
-                tabhandle = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject;
-                tabhandle.SetActive(true);
-
+                if (usehandle == defaultIf[(int)_DefaultInterface._Tank1])
+                    SetScrollCategory(handle.childs[0], Item_Ty._Tank1);
+                else
+                    SetScrollCategory(handle.childs[0], Item_Ty._Tank2);
                 break;
             case _TyIf.SHARKSHOP:
                 tabhandle = handle.childs[0].transform.parent.gameObject;
                 tabhandle.SetActive(true);
                 OpenSpecialTab();
-                tabhandle = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject;
-                tabhandle.SetActive(true);
                 SetScrollCategory(handle.childs[0], Item_Ty._SharkShop);
 
                 break;

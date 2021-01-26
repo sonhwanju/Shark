@@ -110,6 +110,13 @@ public class ScrollManaging : MonoBehaviour
                         temp.transform.localPosition = new Vector3(600, -index * 250 - 200, 0);
                         temp.transform.localScale = Vector3.one;
                         items[index] = temp.GetComponent<ScrollItem>();
+                        GameObject tempanel = GameObject.Instantiate(temp.GetComponent<Explanation>().clone, Vector3.zero, Quaternion.identity, temp.transform);
+                        tempanel.transform.localPosition = new Vector3(0, 0, 0);
+                        tempanel.transform.localScale = Vector3.one;
+                        temp.GetComponent<Explanation>().exPanel = tempanel;
+                        temp.GetComponent<Explanation>().exText = tempanel.transform.GetChild(0).GetComponent<Text>();
+                        temp.GetComponent<Button>().onClick.AddListener(temp.GetComponent<Explanation>().Touch);
+
                         index++;
                     }
                 }
@@ -135,8 +142,69 @@ public class ScrollManaging : MonoBehaviour
                 }
                 break;
             case Item_Ty._Tank1:
+                length = GameManager.Instance.watertank[0].sharks.Count;
+                this.length = length * 150 + 100;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(700, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
+                for (int i = 0; i < items.Count; i++)
+                {
+                    items[i].gameObject.SetActive(true);
+                }
+                if (items.Count > length)
+                {
+                    for (int i = length; i < items.Count; i++)
+                    {
+                        items[i].gameObject.SetActive(false);
+                    }
+                }
+
                 break;
             case Item_Ty._Tank2:
+                length = GameManager.Instance.watertank[1].sharks.Count;
+                this.length = length * 150 + 100;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(700, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
+                for (int i = 0; i < items.Count; i++)
+                {
+                    items[i].gameObject.SetActive(true);
+                }
+                if (items.Count > length)
+                {
+                    for (int i = length; i < items.Count; i++)
+                    {
+                        items[i].gameObject.SetActive(false);
+                    }
+                }
                 break;
             case Item_Ty._SharkShop:
                 length = GameManager.Instance.sharks.Keys.Count;
@@ -222,8 +290,22 @@ public class ScrollManaging : MonoBehaviour
                 }
                 break;
             case Item_Ty._Tank1:
+                for(; i < GameManager.Instance.watertank[0].sharks.Count; i++)
+                {
+                    _SharkData sd = GameManager.Instance.sharks[GameManager.Instance.watertank[0].sharks[i].name];
+                    items[i].image.sprite = GameManager.Instance.sprites[sd.name];
+                    items[i].itemname.text = GameManager.Instance.watertank[0].sharks[i].stress.ToString();
+                    items[i].content.text = GameManager.Instance.watertank[0].sharks[i].hunger.ToString();
+                }
                 break;
             case Item_Ty._Tank2:
+                for (; i < GameManager.Instance.watertank[1].sharks.Count; i++)
+                {
+                    _SharkData sd = GameManager.Instance.sharks[GameManager.Instance.watertank[1].sharks[i].name];
+                    items[i].image.sprite = GameManager.Instance.sprites[sd.name];
+                    items[i].itemname.text = GameManager.Instance.watertank[0].sharks[i].stress.ToString();
+                    items[i].content.text = GameManager.Instance.watertank[0].sharks[i].hunger.ToString();
+                }
                 break;
             case Item_Ty._SharkShop:
                 foreach (string key in GameManager.Instance.sharks.Keys)
