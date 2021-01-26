@@ -73,15 +73,20 @@ public class InterfaceManager : MonoBehaviour
 
                 break;
             case _TyIf.WATERTANK:
+                tabhandle = handle.childs[0].transform.parent.gameObject;
+                tabhandle.SetActive(true);
                 OpenSpecialTab();
                 tabhandle = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject;
                 tabhandle.SetActive(true);
 
                 break;
             case _TyIf.SHARKSHOP:
+                tabhandle = handle.childs[0].transform.parent.gameObject;
+                tabhandle.SetActive(true);
                 OpenSpecialTab();
                 tabhandle = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].gameObject;
                 tabhandle.SetActive(true);
+                SetScrollCategory(handle.childs[0], Item_Ty._SharkShop);
 
                 break;
         }

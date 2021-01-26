@@ -139,6 +139,24 @@ public class ScrollManaging : MonoBehaviour
             case Item_Ty._Tank2:
                 break;
             case Item_Ty._SharkShop:
+                length = GameManager.Instance.sharks.Keys.Count;
+                index = items.Count;
+                num = items.Count;
+                if (items.Count < length)
+                {
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        items.Add(null);
+                    }
+                    for (int i = 0; i < length - num; i++)
+                    {
+                        GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
+                        temp.transform.localPosition = new Vector3(0, -index * 250 - 200, 0);
+                        temp.transform.localScale = Vector3.one;
+                        items[index] = temp.GetComponent<ScrollItem>();
+                        index++;
+                    }
+                }
                 break;
         }
         ItemLoad();
@@ -208,6 +226,14 @@ public class ScrollManaging : MonoBehaviour
             case Item_Ty._Tank2:
                 break;
             case Item_Ty._SharkShop:
+                foreach (string key in GameManager.Instance.sharks.Keys)
+                {
+                    _SharkData sd = GameManager.Instance.sharks[key];
+                    items[i].image.sprite = GameManager.Instance.sprites[key];
+                    items[i].itemname.text = sd.name;
+                    items[i].content.text = "가격 " + sd.price + "$";
+                    i++;
+                }
                 break;
         }
     }

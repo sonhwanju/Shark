@@ -14,7 +14,8 @@ public class GameManager : MonoSingleton<GameManager>
     public Money money;
     public DowNum downum;
     public Dictionary<string, _SharkData> sharks; // 상어 딕셔너리
-    public Dictionary<string, Sprite> sprites; // 이미지 딕셔너리 귀상어
+    public Dictionary<string, Sprite> sprites; // 이미지 딕셔너리
+    public Dictionary<string, string> contents; // 설명 딕셔너리
     public Dictionary<string, _Food> foods; // 음식 딕셔너리 
     public Dictionary<string, _WaterQuality> waterquality_parts; // 수질 딕셔너리
     public Dictionary<string, _Oxygen> oxygen_parts; // 산소 딕셔너리
@@ -38,6 +39,11 @@ public class GameManager : MonoSingleton<GameManager>
         touch = GetComponent<Touch>(); // 터치 초기화
         interfaceManager = GetComponent<InterfaceManager>(); // 인터페이스 초기화
         LoadData();
+        if (money.money == 0)
+        {
+            money.AddMoney(10000);
+        }
+        money.MoneyUpdate();
     }
 
     private void OnApplicationQuit()
@@ -130,6 +136,7 @@ public class GameManager : MonoSingleton<GameManager>
                 _SharkData value = JsonUtility.FromJson<_SharkData>(kv[1]);
                 sharks[key] = value;
                 LoadSprite(key, value.image);
+                LoadContent(key, value.name);
             }
         }
         if (File.Exists(savepath + "/SaveFile.json")) // 수조 & 음식 데이터
@@ -250,11 +257,20 @@ public class GameManager : MonoSingleton<GameManager>
         }
     }
 
-        private void LoadSprite(string key, string filename)
+    private void LoadSprite(string key, string filename)
     {
         if (File.Exists(spritepath + "/" + filename + ".png"))
         {
             sprites[key] = Resources.Load<Sprite>("Sprites/" + filename);
         }
     } // 이미지 불러오기
+
+    private void LoadContent(string key, string filename)
+    {
+        if (File.Exists(Application.dataPath + "/Resources/Txts/" + filename + ".txt"))
+        {
+            TextAsset ta = Resources.Load<TextAsset>("Txts/" + filename);
+            contents[key] = ta.ToString();
+        }
+    }
 }

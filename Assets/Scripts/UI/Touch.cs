@@ -88,12 +88,15 @@ public class Touch : MonoBehaviour
             {
                 if ((endposition.y - startposition.y) > Screen.height / 10)
                 {
-                    Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab];
-                    tab.transform.DOScale(Vector2.zero, 1f).SetEase(Ease.OutQuint);
-                    GameManager.Instance.interfaceManager.usehandle.transform.DOScale(Vector3.one, 0.5f);
-                    GameManager.Instance.interfaceManager.usehandle = null;
+                    if (GameManager.Instance.interfaceManager.usehandle != null)
+                    {
+                        GameManager.Instance.interfaceManager.usehandle.transform.DOScale(Vector3.one, 0.5f);
+                        GameManager.Instance.interfaceManager.usehandle = null;
+                    }
                     startposition = new Vector2(float.NaN, float.NaN);
                     endposition = new Vector2(float.NaN, float.NaN);
+                    Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab];
+                    tab.transform.DOScale(Vector2.zero, 1f).SetEase(Ease.OutQuint);
                 }
             }
         }
