@@ -1,20 +1,24 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class FoodMng : MonoBehaviour
 {
-    private bool able;
-    private int t;
+    private bool able=false;
     [SerializeField] int rechargeTime=300;
+
+    [SerializeField] GameObject Food;
+    Queue<GameObject> queue = new Queue<GameObject>();
 
     private void Start()
     {
-        if (PlayerPrefs.HasKey("T"))
-            t = PlayerPrefs.GetInt("T");
-        able = t != 0 ? false : true;
-
-        if (!able) StartCoroutine(Recharge());
+        for(int i=0; i<20; ++i)
+        {
+            GameObject _food=Instantiate(Food, Vector2.zero, Quaternion.identity);
+            InsertFood(_food);
+        }
+        StartCoroutine(Recharge());
     }
 
     public void ClickFoodBox()
@@ -22,7 +26,6 @@ public class FoodMng : MonoBehaviour
         if (able)
         {
             able = false;
-            t = rechargeTime;
             StartCoroutine(Recharge());
             int r = Random.Range(1, 101);
 
@@ -67,28 +70,34 @@ public class FoodMng : MonoBehaviour
                 GameManager.Instance.foods["낙지"].count++;
             }
         }
-        else
+       /* else
         {
-            //남은 시간
-        }
+            
+        }*/
     }
 
     IEnumerator Recharge()
     {
-        for(;;)
-        {
-            yield return new WaitForSeconds(1);
-            t--;
-
-            if (t == 0)
-            {
-                able = true;
-                break;
-            }
-        }
+        yield return new WaitForSeconds(rechargeTime);
+        able = true;
     }
 
-    private void OnApplicationQuit() => PlayerPrefs.SetInt("T", t);
-
-    //public void TestFunc() => PlayerPrefs.DeleteKey("T");
+    public void InsertFood(GameObject f)
+    {
+        queue.Enqueue(f);
+        f.SetActive(false);
+    }
+    public GameObject GetFood()
+    {
+        GameObject f=queue.Dequeue();
+        f.SetActive(true);
+        return f;
+    }
+    public void SpawnFood(string key)
+    {
+        GameManager.Instance.foods[key].count--;
+        GameObject f = GetFood();
+        //f.transform.position = 생성위치
+        f.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Foods/" + key);
+    }               //UI->Image, 2dSpr->SpriteRenderer
 }
