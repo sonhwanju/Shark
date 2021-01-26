@@ -151,7 +151,7 @@ public class ScrollManaging : MonoBehaviour
                     for (int i = 0; i < length - num; i++)
                     {
                         GameObject temp = GameObject.Instantiate(item_clone[0], Vector3.zero, Quaternion.identity, GetComponent<ScrollRect>().content.transform);
-                        temp.transform.localPosition = new Vector3(0, -index * 250 - 200, 0);
+                        temp.transform.localPosition = new Vector3(700, -index * 250 - 200, 0);
                         temp.transform.localScale = Vector3.one;
                         items[index] = temp.GetComponent<ScrollItem>();
                         index++;
