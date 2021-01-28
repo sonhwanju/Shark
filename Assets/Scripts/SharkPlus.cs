@@ -29,8 +29,7 @@ public class SharkPlus : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
-                GameManager.Instance.watertank[index].sharks.Add(null);
-                GameManager.Instance.watertank[index].sharks[i].name = data.name;
+                GameManager.Instance.watertank[index].sharks.Add(new Shark(data.name));
             }
             return true;
         }
@@ -38,9 +37,7 @@ public class SharkPlus : MonoBehaviour
         {
             for (int i = 0; i < count; i++)
             {
-                int length = GameManager.Instance.watertank[index].sharks.Count;
-                GameManager.Instance.watertank[index].sharks.Add(null);
-                GameManager.Instance.watertank[index].sharks[i + length].name = data.name;
+                GameManager.Instance.watertank[index].sharks.Add(new Shark(data.name));
             }
             return true;
         }
@@ -51,16 +48,21 @@ public class SharkPlus : MonoBehaviour
     }
     public void Buy() //테스트 안해봄...되는지는 모르겠어요 - 아직 버튼연동 X
     {
-        if(GameManager.Instance.money.money >= _count * _sharkData.price)
+        if (GameManager.Instance.watertank[_index].volume >= GameManager.Instance.watertank[_index].sharks.Count + _count)
         {
-            GameManager.Instance.money.SubMoney(_count * _sharkData.price);
-            GameManager.Instance.money.MoneyUpdate();
-            Shark_Plus(_index, _sharkData, _count);
-        }
-        else if(GameManager.Instance.money.money < _sharkData.price)
-        {
-            //돈 부족
-            return;
+            if (GameManager.Instance.money.money >= _count * _sharkData.price)
+            {
+                if (Shark_Plus(_index, _sharkData, _count))
+                {
+                    GameManager.Instance.money.SubMoney(_count * _sharkData.price);
+                    GameManager.Instance.money.MoneyUpdate();
+                }
+            }
+            else
+            {
+                //돈 부족
+                return;
+            }
         }
     }
 
