@@ -143,7 +143,7 @@ public class ScrollManaging : MonoBehaviour
                 break;
             case Item_Ty._Tank1:
                 length = GameManager.Instance.watertank[0].sharks.Count;
-                this.length = length * 150 + 100;
+                this.length = length * 250;
                 index = items.Count;
                 num = items.Count;
                 if (items.Count < length)
@@ -176,7 +176,7 @@ public class ScrollManaging : MonoBehaviour
                 break;
             case Item_Ty._Tank2:
                 length = GameManager.Instance.watertank[1].sharks.Count;
-                this.length = length * 150 + 100;
+                this.length = length * 250;
                 index = items.Count;
                 num = items.Count;
                 if (items.Count < length)
@@ -314,6 +314,8 @@ public class ScrollManaging : MonoBehaviour
                     {
                         items[i].content.text = "착용함";
                         pb.state = partstate.puted;
+                        GameManager.Instance.watertank[0].volume = vo.size;
+                        GameManager.Instance.watertank[1].volume = vo.size;
                     }
                     else if (vo.buy)
                     {
@@ -356,6 +358,7 @@ public class ScrollManaging : MonoBehaviour
                     items[i].image.sprite = GameManager.Instance.sprites[sd.name];
                     items[i].itemname.text = GameManager.Instance.watertank[0].sharks[i].stress.ToString();
                     items[i].content.text = GameManager.Instance.watertank[0].sharks[i].hunger.ToString();
+                    items[i].content.transform.GetChild(0).GetComponent<Text>().text = GameManager.Instance.watertank[0].sharks[i].curSize.ToString();
                 }
                 break;
             case Item_Ty._Tank2:
@@ -363,8 +366,9 @@ public class ScrollManaging : MonoBehaviour
                 {
                     _SharkData sd = GameManager.Instance.sharks[GameManager.Instance.watertank[1].sharks[i].name];
                     items[i].image.sprite = GameManager.Instance.sprites[sd.name];
-                    items[i].itemname.text = GameManager.Instance.watertank[0].sharks[i].stress.ToString();
-                    items[i].content.text = GameManager.Instance.watertank[0].sharks[i].hunger.ToString();
+                    items[i].itemname.text = GameManager.Instance.watertank[1].sharks[i].stress.ToString();
+                    items[i].content.text = GameManager.Instance.watertank[1].sharks[i].hunger.ToString();
+                    items[i].content.transform.GetChild(0).GetComponent<Text>().text = GameManager.Instance.watertank[1].sharks[i].curSize.ToString();
                 }
                 break;
             case Item_Ty._SharkShop:

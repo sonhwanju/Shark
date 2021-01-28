@@ -44,6 +44,9 @@ public class GameManager : MonoSingleton<GameManager>
             money.AddMoney(10000);
         }
         money.MoneyUpdate();
+
+        watertank[0].volume = volume_parts[watertank[0].part.volume].size;
+        watertank[1].volume = volume_parts[watertank[0].part.volume].size;
     }
 
     private void OnApplicationQuit()
