@@ -3,22 +3,32 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class FoodMng : MonoBehaviour
+public class FoodMng: MonoBehaviour
 {
-    private bool able=false;
-    [SerializeField] int rechargeTime=300;
+    public static FoodMng Instance;
+    private bool able = false;
+    public string key;
+    [SerializeField] int rechargeTime = 300;
+
+    [SerializeField] GameObject inven;
+    [SerializeField] Button invenBtn;
+    int index=0;
+    bool isClick = false;
 
     [SerializeField] GameObject Food;
     Queue<GameObject> queue = new Queue<GameObject>();
 
     private void Start()
     {
-        for(int i=0; i<20; ++i)
+        Instance = this;
+        for (int i = 0; i < 20; ++i)
         {
-            GameObject _food=Instantiate(Food, Vector2.zero, Quaternion.identity);
+            GameObject _food = Instantiate(Food, Vector2.zero, Quaternion.identity);
+            _food.transform.SetParent(transform);
             InsertFood(_food);
         }
         StartCoroutine(Recharge());
+        invenBtn.onClick.AddListener(DelayKey);
     }
 
     public void ClickFoodBox()
@@ -70,10 +80,10 @@ public class FoodMng : MonoBehaviour
                 GameManager.Instance.foods["낙지"].count++;
             }
         }
-       /* else
-        {
-            
-        }*/
+        /* else
+         {
+
+         }*/
     }
 
     IEnumerator Recharge()
@@ -89,15 +99,36 @@ public class FoodMng : MonoBehaviour
     }
     public GameObject GetFood()
     {
-        GameObject f=queue.Dequeue();
+        GameObject f = queue.Dequeue();
         f.SetActive(true);
         return f;
     }
-    public void SpawnFood(string key)
+    public void SpawnFood()
     {
-        GameManager.Instance.foods[key].count--;
-        GameObject f = GetFood();
-        //f.transform.position = 생성위치
-        f.GetComponent<Image>().sprite = Resources.Load<Sprite>("Sprites/Foods/" + key);
-    }               //UI->Image, 2dSpr->SpriteRenderer
+        if (GameManager.Instance.foods[key].count > 0)
+        {
+            GameManager.Instance.foods[key].count--;
+            GameObject f = GetFood();
+            f.transform.position = Vector2.zero;  //임시 생성위치
+            f.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Foods/" + key);
+        }            //UI->Image, 2dSpr->SpriteRenderer
+    }
+
+
+    public void DelayKey()
+    {
+        if (!isClick)
+        {
+            isClick = true;
+            Invoke("GiveKey", 0.5f);
+        }
+    }
+    public void GiveKey()
+    {
+        foreach(string k in GameManager.Instance.foods.Keys)
+        {
+            inven.transform.GetChild(index).GetComponent<FoodBtn>().key = k;
+            index++;
+        }
+    }
 }
