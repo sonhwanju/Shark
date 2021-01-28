@@ -56,6 +56,10 @@ public class SharkPlus : MonoBehaviour
                 {
                     GameManager.Instance.money.SubMoney(_count * _sharkData.price);
                     GameManager.Instance.money.MoneyUpdate();
+                    _count = 0;
+                    sharkText.text = _count + "x";
+                    SelectTank1();
+                    SelectShark(0);
                 }
             }
             else
