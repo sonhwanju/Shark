@@ -153,6 +153,9 @@ MonoBehaviour:
   clone: {fileID: 1758351986508562197, guid: d20770ecf896fda4b90c0af248a3ebe9, type: 3}
   exPanel: {fileID: 0}
   exText: {fileID: 0}
+  sprite:
+  - {fileID: 21300000, guid: 12d20197118d6d144b9f099097eaf265, type: 3}
+  - {fileID: 21300000, guid: db4882f35d26ab541a75b3e60f9b62b7, type: 3}
 --- !u!1 &2130572740177223961
 GameObject:
   m_ObjectHideFlags: 0

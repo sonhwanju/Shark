@@ -166,5 +166,6 @@ public enum _DefaultInterface
     _Tank1,
     _Tank2,
     _Sharkshop,
-    _SpecialTab
+    _SpecialTab,
+    _partshopTab
 }

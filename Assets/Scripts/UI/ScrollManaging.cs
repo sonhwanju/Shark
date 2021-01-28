@@ -242,7 +242,27 @@ public class ScrollManaging : MonoBehaviour
                     _WaterQuality wq = GameManager.Instance.waterquality_parts[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = wq.name;
-                    items[i].content.text = "가격 " + wq.price + "$";
+                    partButton pb = items[i].GetComponent<partButton>();
+                    Interface tempIf = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._partshopTab];
+                    pb.panel = tempIf.gameObject;
+                    pb.text = tempIf.childs[0].GetComponent<Text>();
+                    pb.part = tempIf.childs[1].GetComponent<Text>();
+                    pb.image = tempIf.childs[2].GetComponent<Image>();
+                    if (wq.name == GameManager.Instance.watertank[0].part.waterQuality)
+                    {
+                        items[i].content.text = "착용함";
+                        pb.state = partstate.puted;
+                    }
+                    else if (wq.buy)
+                    {
+                        items[i].content.text = "구매함";
+                        pb.state = partstate.buyed;
+                    }
+                    else
+                    {
+                        items[i].content.text = "가격 " + wq.price + "$";
+                        pb.state = partstate.notbuyed;
+                    }
                     i++;
                 }
                 CategorySelect();
@@ -253,7 +273,27 @@ public class ScrollManaging : MonoBehaviour
                     _Oxygen ox = GameManager.Instance.oxygen_parts[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = ox.name;
-                    items[i].content.text = "가격 " + ox.price + "$";
+                    partButton pb = items[i].GetComponent<partButton>();
+                    Interface tempIf = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._partshopTab];
+                    pb.panel = tempIf.gameObject;
+                    pb.text = tempIf.childs[0].GetComponent<Text>();
+                    pb.part = tempIf.childs[1].GetComponent<Text>();
+                    pb.image = tempIf.childs[2].GetComponent<Image>();
+                    if (ox.name == GameManager.Instance.watertank[0].part.oxygen)
+                    {
+                        items[i].content.text = "착용함";
+                        pb.state = partstate.puted;
+                    }
+                    else if (ox.buy)
+                    {
+                        items[i].content.text = "구매함";
+                        pb.state = partstate.buyed;
+                    }
+                    else
+                    {
+                        items[i].content.text = "가격 " + ox.price + "$";
+                        pb.state = partstate.notbuyed;
+                    }
                     i++;
                 }
                 CategorySelect();
@@ -264,7 +304,27 @@ public class ScrollManaging : MonoBehaviour
                     _Volume vo = GameManager.Instance.volume_parts[key];
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = vo.name;
-                    items[i].content.text = "가격 " + vo.price + "$";
+                    partButton pb = items[i].GetComponent<partButton>();
+                    Interface tempIf = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._partshopTab];
+                    pb.panel = tempIf.gameObject;
+                    pb.text = tempIf.childs[0].GetComponent<Text>();
+                    pb.part = tempIf.childs[1].GetComponent<Text>();
+                    pb.image = tempIf.childs[2].GetComponent<Image>();
+                    if (vo.name == GameManager.Instance.watertank[0].part.volume)
+                    {
+                        items[i].content.text = "착용함";
+                        pb.state = partstate.puted;
+                    }
+                    else if (vo.buy)
+                    {
+                        items[i].content.text = "구매함";
+                        pb.state = partstate.buyed;
+                    }
+                    else
+                    {
+                        items[i].content.text = "가격 " + vo.price + "$";
+                        pb.state = partstate.notbuyed;
+                    }
                     i++;
                 }
                 CategorySelect();

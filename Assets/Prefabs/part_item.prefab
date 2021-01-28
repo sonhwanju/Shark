@@ -87,6 +87,7 @@ GameObject:
   - component: {fileID: 3354505044348814340}
   - component: {fileID: 3354505044348814341}
   - component: {fileID: 3354505044348814338}
+  - component: {fileID: -56311729853691076}
   m_Layer: 5
   m_Name: part_item
   m_TagString: Untagged
@@ -195,7 +196,18 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 3354505044348814340}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 0}
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &3354505044348814338
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -211,6 +223,23 @@ MonoBehaviour:
   image: {fileID: 3354505044158678576}
   itemname: {fileID: 3354505045186434309}
   content: {fileID: 3354505044932710713}
+--- !u!114 &-56311729853691076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3354505044348814343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb115e2c57c1eb04c92babb158ba0c50, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  state: 0
+  panel: {fileID: 0}
+  text: {fileID: 0}
+  part: {fileID: 0}
+  image: {fileID: 0}
 --- !u!1 &3354505044932710715
 GameObject:
   m_ObjectHideFlags: 0
