@@ -10,6 +10,11 @@ public class FoodMng: MonoBehaviour
     public string key;
     [SerializeField] int rechargeTime = 300;
 
+    [SerializeField] GameObject inven;
+    [SerializeField] Button invenBtn;
+    int index=0;
+    bool isClick = false;
+
     [SerializeField] GameObject Food;
     Queue<GameObject> queue = new Queue<GameObject>();
 
@@ -23,6 +28,7 @@ public class FoodMng: MonoBehaviour
             InsertFood(_food);
         }
         StartCoroutine(Recharge());
+        invenBtn.onClick.AddListener(DelayKey);
     }
 
     public void ClickFoodBox()
@@ -106,5 +112,23 @@ public class FoodMng: MonoBehaviour
             f.transform.position = Vector2.zero;  //임시 생성위치
             f.GetComponent<SpriteRenderer>().sprite = Resources.Load<Sprite>("Sprites/Foods/" + key);
         }            //UI->Image, 2dSpr->SpriteRenderer
+    }
+
+
+    public void DelayKey()
+    {
+        if (!isClick)
+        {
+            isClick = true;
+            Invoke("GiveKey", 0.5f);
+        }
+    }
+    public void GiveKey()
+    {
+        foreach(string k in GameManager.Instance.foods.Keys)
+        {
+            inven.transform.GetChild(index).GetComponent<FoodBtn>().key = k;
+            index++;
+        }
     }
 }

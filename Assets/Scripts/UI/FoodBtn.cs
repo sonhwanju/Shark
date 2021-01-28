@@ -5,7 +5,7 @@ using UnityEngine.UI;
 
 public class FoodBtn : MonoBehaviour
 {
-    string key;
+    public string key;
 
     private void Start()
     {
@@ -14,7 +14,7 @@ public class FoodBtn : MonoBehaviour
 
     void ClickBtn()
     {
-        key = GetComponent<ScrollItem>().itemname.text;
+        //key = GetComponent<ScrollItem>().itemname.text;  텍스트가 없음
         FoodMng.Instance.key=key;
     }
 }

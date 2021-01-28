@@ -4377,6 +4377,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   key: 
   rechargeTime: 300
+  inven: {fileID: 580454823}
+  invenBtn: {fileID: 222339624}
   Food: {fileID: 810137209303080946, guid: 7a68b2a5271a51e4b9544483dc6fff03, type: 3}
 --- !u!4 &1009167636
 Transform:
