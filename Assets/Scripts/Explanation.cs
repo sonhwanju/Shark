@@ -8,7 +8,7 @@ public class Explanation : MonoBehaviour
     public GameObject clone;
     public GameObject exPanel;
     public Text exText;
-    public Sprite[] sprite = new Sprite[2];
+
 
     private int x = 1;
 

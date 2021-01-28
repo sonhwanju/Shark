@@ -9,13 +9,18 @@ public class SharkPlus : MonoBehaviour
     private Text sharkText;
 
     public int _count;
-    public int _index;
+    public int _index; // 고른 수조
 
-    _SharkData _sharkData;
+    public _SharkData _sharkData; // 고른 상어
+    public Sprite[] sprite = new Sprite[4];
+
+    public Image[] tkbt = new Image[2];
+
+    public int handle;
     private void Start()
     {
         _count = 1;
-        _index = 0;
+        SelectTank1();
     }
 
     public bool Shark_Plus(int index, _SharkData data, int count)
@@ -46,7 +51,7 @@ public class SharkPlus : MonoBehaviour
     }
     public void Buy() //테스트 안해봄...되는지는 모르겠어요 - 아직 버튼연동 X
     {
-        if(GameManager.Instance.money.money > _sharkData.price)
+        if(GameManager.Instance.money.money >= _count * _sharkData.price)
         {
             GameManager.Instance.money.SubMoney(_count * _sharkData.price);
             GameManager.Instance.money.MoneyUpdate();
@@ -74,13 +79,25 @@ public class SharkPlus : MonoBehaviour
         }
     }
 
-    public void Index_Zero()
+    public void SelectShark(int h)
     {
-        _index = 0;
+        ScrollManaging sm = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].childs[0].GetComponent<ScrollManaging>();
+        sm.items[handle].GetComponent<Image>().sprite = sprite[0];
+        handle = h;
+        _sharkData = GameManager.Instance.sharks[sm.items[handle].GetComponent<ScrollItem>().itemname.text];
+        sm.items[handle].GetComponent<Image>().sprite = sprite[1];
     }
 
-    public void Index_One()
+    public void SelectTank1()
     {
+        tkbt[1].sprite = sprite[2];
+        _index = 0;
+        tkbt[0].sprite = sprite[3];
+    }
+    public void SelectTank2()
+    {
+        tkbt[0].sprite = sprite[2];
         _index = 1;
+        tkbt[1].sprite = sprite[3];
     }
 }

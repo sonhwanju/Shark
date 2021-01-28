@@ -374,8 +374,10 @@ public class ScrollManaging : MonoBehaviour
                     items[i].image.sprite = GameManager.Instance.sprites[key];
                     items[i].itemname.text = sd.name;
                     items[i].content.text = "가격 " + sd.price + "$";
+                    items[i].index = i;
                     i++;
                 }
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._TextEditor].GetComponent<SharkPlus>().SelectShark(0);
                 break;
         }
     }

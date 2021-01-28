@@ -3064,6 +3064,8 @@ MonoBehaviour:
   - {fileID: 1513645138}
   - {fileID: 984983773}
   - {fileID: 231702307}
+  - {fileID: 1930433381}
+  - {fileID: 1158298595}
   type: 7
   parent: {fileID: 0}
   subtype: 
@@ -5087,7 +5089,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1390691293}
-        m_MethodName: Index_One
+        m_MethodName: SelectTank2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -5996,6 +5998,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1390691294}
   - component: {fileID: 1390691293}
+  - component: {fileID: 1390691295}
   m_Layer: 0
   m_Name: TextEd
   m_TagString: Untagged
@@ -6018,6 +6021,23 @@ MonoBehaviour:
   sharkText: {fileID: 243094255}
   _count: 1
   _index: 0
+  _sharkData:
+    name: 
+    image: 
+    food: []
+    price: 0
+    adultTime: 0
+    stressLimit: 0
+    special: 0
+    maxSize: 0
+    minSize: 0
+    dowLimit: 0
+    neWaterQuality: 0
+  sprite:
+  - {fileID: 21300000, guid: 12d20197118d6d144b9f099097eaf265, type: 3}
+  - {fileID: 21300000, guid: db4882f35d26ab541a75b3e60f9b62b7, type: 3}
+  - {fileID: 21300000, guid: f8375c2235824b54ab7df8c8908e163c, type: 3}
+  - {fileID: 21300000, guid: fec0b9594c9388945a5171bd213c3754, type: 3}
 --- !u!4 &1390691294
 Transform:
   m_ObjectHideFlags: 0
@@ -6032,6 +6052,22 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1390691295
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1390691292}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9c3fe17abce54468ede3a160153ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childs: []
+  type: 9
+  parent: {fileID: 0}
+  subtype: 
 --- !u!1 &1505924914
 GameObject:
   m_ObjectHideFlags: 0
@@ -6803,6 +6839,7 @@ MonoBehaviour:
   - {fileID: 822416709}
   - {fileID: 1641606079}
   - {fileID: 1567728072}
+  - {fileID: 1390691295}
   usehandle: {fileID: 0}
   tabhandle: {fileID: 0}
 --- !u!114 &1579795066
@@ -8391,7 +8428,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1390691293}
-        m_MethodName: Index_Zero
+        m_MethodName: SelectTank1
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
