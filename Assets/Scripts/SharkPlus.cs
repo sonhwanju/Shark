@@ -14,7 +14,7 @@ public class SharkPlus : MonoBehaviour
     _SharkData _sharkData;
     private void Start()
     {
-        _count = 0;
+        _count = 1;
         _index = 0;
     }
 
@@ -67,7 +67,7 @@ public class SharkPlus : MonoBehaviour
 
     public void Text_Minus()
     {
-        if (_count > 0)
+        if (_count > 1)
         {
             _count--;
             sharkText.text = _count + "x";

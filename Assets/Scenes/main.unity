@@ -1821,7 +1821,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 0x
+  m_Text: 1x
 --- !u!222 &243094256
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -5522,7 +5522,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   sharkText: {fileID: 243094255}
-  _count: 0
+  _count: 1
   _index: 0
 --- !u!4 &1390691294
 Transform:
