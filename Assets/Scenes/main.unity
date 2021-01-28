@@ -6038,6 +6038,10 @@ MonoBehaviour:
   - {fileID: 21300000, guid: db4882f35d26ab541a75b3e60f9b62b7, type: 3}
   - {fileID: 21300000, guid: f8375c2235824b54ab7df8c8908e163c, type: 3}
   - {fileID: 21300000, guid: fec0b9594c9388945a5171bd213c3754, type: 3}
+  tkbt:
+  - {fileID: 1930433383}
+  - {fileID: 1158298597}
+  handle: 0
 --- !u!4 &1390691294
 Transform:
   m_ObjectHideFlags: 0
