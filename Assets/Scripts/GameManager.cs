@@ -10,7 +10,6 @@ public class GameManager : MonoSingleton<GameManager>
     public InterfaceManager interfaceManager; // 인터페이스 매니저
     public Touch touch; // 터치 체크
     public bool isSea = false;
-    public bool firstCheck = false;
 
     public Money money;
     public DowNum downum;
@@ -40,10 +39,9 @@ public class GameManager : MonoSingleton<GameManager>
         touch = GetComponent<Touch>(); // 터치 초기화
         interfaceManager = GetComponent<InterfaceManager>(); // 인터페이스 초기화
         LoadData();
-        if (money.money == 0 && firstCheck == false)
+        if (money.money == 0)
         {
             money.AddMoney(10000);
-            firstCheck = true;
         }
         money.MoneyUpdate();
 
