@@ -24,6 +24,8 @@ public class InterfaceManager : MonoBehaviour
         switch (type)
         {
             case _TyIf.MENU:
+                Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab];
+                tab.transform.DOScale(Vector2.zero, 1f).SetEase(Ease.OutQuint);
                 Interface temp;
                 RectTransform h = handle.GetComponent<RectTransform>();
                 float moveF;
@@ -103,19 +105,31 @@ public class InterfaceManager : MonoBehaviour
     {
         if (usehandle == null)
         {
-            handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
             usehandle = handle;
+            handle.transform.DOScale(Vector3.one * 1.14f, 0.5f).OnComplete(ButtonReturn);
         }
         else
         {
             usehandle.transform.DOScale(Vector3.one, 0.5f);
             if (usehandle != handle)
             {
-                handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
                 usehandle = handle;
+                handle.transform.DOScale(Vector3.one * 1.14f, 0.5f).OnComplete(ButtonReturn);
             }
             else
             {
+                usehandle = null;
+            }
+        }
+    }
+
+    public void ButtonReturn()
+    {
+        if (usehandle != null)
+        {
+            if ((usehandle.type == _TyIf.SHARKSHOP) || (usehandle.type == _TyIf.WATERTANK) || (usehandle.type == _TyIf.WATERTANK))
+            {
+                usehandle.transform.DOScale(Vector3.one, 0.5f);
                 usehandle = null;
             }
         }

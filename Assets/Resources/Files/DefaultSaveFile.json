@@ -13,16 +13,16 @@ $
 {"key":"낙지"}|{"name":"낙지","image":"Foods/낙지","count":0}
 {"key":"플랑크톤"}|{"name":"플랑크톤","image":"Foods/플랑크톤","count":0}
 $
-{"key":"등급1 여과기"}|{"name":"등급1 여과기","image":"Parts/등급1 여과기","raiting":30,"price":300,"buy":true}
-{"key":"등급2 여과기"}|{"name":"등급2 여과기","image":"Parts/등급2 여과기","raiting":60,"price":6000,"buy":false}
-{"key":"등급3 여과기"}|{"name":"등급3 여과기","image":"Parts/등급3 여과기","raiting":110,"price":90000,"buy":false}
+{"key":"등급1 여과기"}|{"name":"등급1 여과기","image":"Parts/등급1 여과기","raiting":3000,"price":300,"buy":true}
+{"key":"등급2 여과기"}|{"name":"등급2 여과기","image":"Parts/등급2 여과기","raiting":6000,"price":6000,"buy":false}
+{"key":"등급3 여과기"}|{"name":"등급3 여과기","image":"Parts/등급3 여과기","raiting":11000,"price":90000,"buy":false}
 $
-{"key":"등급1 산소통"}|{"name":"등급1 산소통","image":"Parts/등급1 산소통","raiting":50,"price":300,"buy":true}
-{"key":"등급2 산소통"}|{"name":"등급2 산소통","image":"Parts/등급2 산소통","raiting":105,"price":6000,"buy":false}
-{"key":"등급3 산소통"}|{"name":"등급3 산소통","image":"Parts/등급3 산소통","raiting":200,"price":90000,"buy":false}
+{"key":"등급1 산소통"}|{"name":"등급1 산소통","image":"Parts/등급1 산소통","raiting":5000,"price":300,"buy":true}
+{"key":"등급2 산소통"}|{"name":"등급2 산소통","image":"Parts/등급2 산소통","raiting":10500,"price":6000,"buy":false}
+{"key":"등급3 산소통"}|{"name":"등급3 산소통","image":"Parts/등급3 산소통","raiting":20000,"price":90000,"buy":false}
 $
-{"key":"등급1 수조"}|{"name":"등급1 수조","image":"Parts/등급1 수조","size":50,"price":300,"buy":true}
-{"key":"등급2 수조"}|{"name":"등급2 수조","image":"Parts/등급2 수조","size":105,"price":6000,"buy":false}
-{"key":"등급3 수조"}|{"name":"등급3 수조","image":"Parts/등급3 수조","size":200,"price":90000,"buy":false}
+{"key":"등급1 수조"}|{"name":"등급1 수조","image":"Parts/등급1 수조","size":5000,"price":300,"buy":true}
+{"key":"등급2 수조"}|{"name":"등급2 수조","image":"Parts/등급2 수조","size":10500,"price":6000,"buy":false}
+{"key":"등급3 수조"}|{"name":"등급3 수조","image":"Parts/등급3 수조","size":20000,"price":90000,"buy":false}
 $
 {"money":0}|{"shark1":0,"shark2":0,"shark3":0}
