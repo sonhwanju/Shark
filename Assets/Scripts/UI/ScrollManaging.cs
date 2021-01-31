@@ -365,6 +365,8 @@ public class ScrollManaging : MonoBehaviour
                     stress /= GameManager.Instance.watertank[0].sharks.Count;
                 GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[2].GetComponent<Text>().text = GameManager.Instance.watertank[0].waterQuality.ToString();
                 GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[3].GetComponent<Text>().text = stress.ToString();
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[4].GetComponent<Button>().onClick.RemoveAllListeners();
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[4].GetComponent<Button>().onClick.AddListener(delegate { Sell(0); });
                 break;
             case Item_Ty._Tank2:
                 for (; i < GameManager.Instance.watertank[1].sharks.Count; i++)
@@ -379,6 +381,8 @@ public class ScrollManaging : MonoBehaviour
                     stress /= GameManager.Instance.watertank[1].sharks.Count;
                 GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[2].GetComponent<Text>().text = GameManager.Instance.watertank[1].waterQuality.ToString();
                 GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[3].GetComponent<Text>().text = stress.ToString();
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[4].GetComponent<Button>().onClick.RemoveAllListeners();
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[4].GetComponent<Button>().onClick.AddListener(delegate { Sell(1); });
                 break;
             case Item_Ty._SharkShop:
                 foreach (string key in GameManager.Instance.sharks.Keys)
@@ -414,6 +418,16 @@ public class ScrollManaging : MonoBehaviour
                 categories[2].GetComponent<Image>().sprite = categories[2].sprites[1];
                 break;
         }
+    }
+    public void Sell(int index)
+    {
+        for (int i = 0; i < GameManager.Instance.watertank[index].sharks.Count;)
+        {
+            GameManager.Instance.money.AddMoney(GameManager.Instance.sharks[GameManager.Instance.watertank[index].sharks[i].name].price * (GameManager.Instance.watertank[index].sharks[i].curSize / GameManager.Instance.sharks[GameManager.Instance.watertank[index].sharks[i].name].maxSize));
+            GameManager.Instance.money.MoneyUpdate();
+            GameManager.Instance.watertank[index].sharks.RemoveAt(i);
+        }
+        ItemLoad();
     }
 }
 

@@ -80,6 +80,7 @@ public class SharkPlus : MonoBehaviour
         }
     }
 
+
     public void SpecialTabColor(Color color)
     {
         GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].GetComponent<Image>().DOColor(color, 0.5f).OnComplete(() =>
