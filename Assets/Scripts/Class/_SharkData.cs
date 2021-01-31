@@ -15,6 +15,6 @@ public class _SharkData
     public short special; // 희귀도
     public short maxSize; //최대 크기
     public short minSize; //최소 크기
-    public short dowLimit; // 방류 상한치
+    public short dowLimit; // 하루 성장폭
     public short neWaterQuality; //필요 수질
 }

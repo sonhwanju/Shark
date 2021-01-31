@@ -6,8 +6,7 @@ using UnityEngine.UI;
 public class Interface : MonoBehaviour
 {
     public Interface[] childs;
-    [SerializeField]
-    private _TyIf type;
+    public _TyIf type;
     public Interface parent;
     public string subtype;
 

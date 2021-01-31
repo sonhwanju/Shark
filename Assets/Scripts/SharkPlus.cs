@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using DG.Tweening;
 
 public class SharkPlus : MonoBehaviour
 {
@@ -43,12 +44,13 @@ public class SharkPlus : MonoBehaviour
         }
         else // 다른 상어가 있다넹
         {
+            SpecialTabColor(new Color(1f, 0.7f, 0.7f));
             return false;
         }
     }
     public void Buy() //테스트 안해봄...되는지는 모르겠어요 - 아직 버튼연동 X
     {
-        if (GameManager.Instance.watertank[_index].volume >= GameManager.Instance.watertank[_index].sharks.Count + _count)
+        if (GameManager.Instance.watertank[_index].volume / 100 >= _count + GameManager.Instance.watertank[_index].sharks.Count)
         {
             if (GameManager.Instance.money.money >= _count * _sharkData.price)
             {
@@ -56,18 +58,34 @@ public class SharkPlus : MonoBehaviour
                 {
                     GameManager.Instance.money.SubMoney(_count * _sharkData.price);
                     GameManager.Instance.money.MoneyUpdate();
-                    _count = 0;
+                    _count = 1;
                     sharkText.text = _count + "x";
                     SelectTank1();
                     SelectShark(0);
+                    SpecialTabColor(new Color(0.7f, 1f, 0.7f));
                 }
             }
             else
             {
                 //돈 부족
+                SpecialTabColor(new Color(1f, 0.7f, 0.7f));
                 return;
             }
         }
+        else
+        {
+            //용량 부족
+            SpecialTabColor(new Color(1f, 0.7f, 0.7f));
+            return;
+        }
+    }
+
+    public void SpecialTabColor(Color color)
+    {
+        GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].GetComponent<Image>().DOColor(color, 0.5f).OnComplete(() =>
+        {
+            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab].GetComponent<Image>().DOColor(new Color(1f, 1f, 1f), 0.5f);
+        });
     }
 
     public void Text_Plus()
