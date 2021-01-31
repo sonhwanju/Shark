@@ -106,7 +106,7 @@ public class InterfaceManager : MonoBehaviour
         if (usehandle == null)
         {
             usehandle = handle;
-            handle.transform.DOScale(Vector3.one * 1.14f, 0.5f).OnComplete(ButtonReturn);
+            handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
         }
         else
         {
@@ -114,22 +114,10 @@ public class InterfaceManager : MonoBehaviour
             if (usehandle != handle)
             {
                 usehandle = handle;
-                handle.transform.DOScale(Vector3.one * 1.14f, 0.5f).OnComplete(ButtonReturn);
+                handle.transform.DOScale(Vector3.one * 1.14f, 0.5f);
             }
             else
             {
-                usehandle = null;
-            }
-        }
-    }
-
-    public void ButtonReturn()
-    {
-        if (usehandle != null)
-        {
-            if ((usehandle.type == _TyIf.SHARKSHOP) || (usehandle.type == _TyIf.WATERTANK) || (usehandle.type == _TyIf.WATERTANK))
-            {
-                usehandle.transform.DOScale(Vector3.one, 0.5f);
                 usehandle = null;
             }
         }
@@ -182,5 +170,6 @@ public enum _DefaultInterface
     _Sharkshop,
     _SpecialTab,
     _partshopTab,
-    _TextEditor
+    _TextEditor,
+    _FoodBoxBtn
 }

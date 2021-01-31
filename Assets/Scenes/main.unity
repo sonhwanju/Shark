@@ -6467,6 +6467,7 @@ MonoBehaviour:
   - {fileID: 1641606079}
   - {fileID: 1567728072}
   - {fileID: 1390691295}
+  - {fileID: 2121891076}
   usehandle: {fileID: 0}
   tabhandle: {fileID: 0}
 --- !u!114 &1579795066
@@ -8601,6 +8602,7 @@ GameObject:
   - component: {fileID: 2121891075}
   - component: {fileID: 2121891074}
   - component: {fileID: 2121891073}
+  - component: {fileID: 2121891076}
   m_Layer: 5
   m_Name: FoodBoxButton
   m_TagString: Untagged
@@ -8624,7 +8626,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 232, y: -98}
+  m_AnchoredPosition: {x: 200, y: -80}
   m_SizeDelta: {x: 200, y: 200}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2121891073
@@ -8718,6 +8720,22 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2121891071}
   m_CullTransparentMesh: 0
+--- !u!114 &2121891076
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2121891071}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fb9c3fe17abce54468ede3a160153ab3, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  childs: []
+  type: 9
+  parent: {fileID: 0}
+  subtype: 
 --- !u!1 &2126796114
 GameObject:
   m_ObjectHideFlags: 0

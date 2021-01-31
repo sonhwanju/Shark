@@ -44,6 +44,7 @@ public class Touch : MonoBehaviour
                             GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].gameObject.SetActive(true);
                             GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].gameObject.SetActive(true);
                             GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].gameObject.SetActive(false);
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._FoodBoxBtn].gameObject.SetActive(false);
                             GameManager.Instance.interfaceManager.usehandle = null;
                             blackout.DOFade(0, 0.5f).OnComplete(() =>
                             {
@@ -70,6 +71,7 @@ public class Touch : MonoBehaviour
                             GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].gameObject.SetActive(false);
                             GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].gameObject.SetActive(false);
                             GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Sharkshop].gameObject.SetActive(true);
+                            GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._FoodBoxBtn].gameObject.SetActive(true);
                             GameManager.Instance.interfaceManager.usehandle = null;
                             blackout.DOFade(0, 0.5f).OnComplete(() =>
                             {
@@ -86,6 +88,11 @@ public class Touch : MonoBehaviour
         {
             if ((endposition.y > Screen.height / 5 * 4) && (startposition.y > Screen.height / 5 * 4))
             {
+                if (GameManager.Instance.interfaceManager.usehandle != null)
+                {
+                    GameManager.Instance.interfaceManager.usehandle.transform.DOScale(Vector3.one, 0.5f);
+                    GameManager.Instance.interfaceManager.usehandle = null;
+                }
                 startposition = new Vector2(float.NaN, float.NaN);
                 endposition = new Vector2(float.NaN, float.NaN);
                 Interface tab = GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._SpecialTab];
