@@ -234,6 +234,7 @@ public class ScrollManaging : MonoBehaviour
     {
         GetComponent<ScrollRect>().content.transform.localPosition = Vector3.zero;
         int i = 0;
+        int stress = 0;
         switch (type)
         {
             case Item_Ty._WaterQuality:
@@ -357,9 +358,13 @@ public class ScrollManaging : MonoBehaviour
                     _SharkData sd = GameManager.Instance.sharks[GameManager.Instance.watertank[0].sharks[i].name];
                     items[i].image.sprite = GameManager.Instance.sprites[sd.name];
                     items[i].itemname.text = GameManager.Instance.watertank[0].sharks[i].stress.ToString();
-                    items[i].content.text = GameManager.Instance.watertank[0].sharks[i].hunger.ToString();
-                    items[i].content.transform.GetChild(0).GetComponent<Text>().text = GameManager.Instance.watertank[0].sharks[i].curSize.ToString();
+                    items[i].content.text = GameManager.Instance.watertank[0].sharks[i].curSize.ToString();
+                    stress += GameManager.Instance.watertank[0].sharks[i].stress;
                 }
+                if (GameManager.Instance.watertank[0].sharks.Count != 0)
+                    stress /= GameManager.Instance.watertank[0].sharks.Count;
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[2].GetComponent<Text>().text = GameManager.Instance.watertank[0].waterQuality.ToString();
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank1].childs[3].GetComponent<Text>().text = stress.ToString();
                 break;
             case Item_Ty._Tank2:
                 for (; i < GameManager.Instance.watertank[1].sharks.Count; i++)
@@ -367,9 +372,13 @@ public class ScrollManaging : MonoBehaviour
                     _SharkData sd = GameManager.Instance.sharks[GameManager.Instance.watertank[1].sharks[i].name];
                     items[i].image.sprite = GameManager.Instance.sprites[sd.name];
                     items[i].itemname.text = GameManager.Instance.watertank[1].sharks[i].stress.ToString();
-                    items[i].content.text = GameManager.Instance.watertank[1].sharks[i].hunger.ToString();
-                    items[i].content.transform.GetChild(0).GetComponent<Text>().text = GameManager.Instance.watertank[1].sharks[i].curSize.ToString();
+                    items[i].content.text = GameManager.Instance.watertank[1].sharks[i].curSize.ToString();
+                    stress += GameManager.Instance.watertank[1].sharks[i].stress;
                 }
+                if (GameManager.Instance.watertank[1].sharks.Count != 0)
+                    stress /= GameManager.Instance.watertank[1].sharks.Count;
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[2].GetComponent<Text>().text = GameManager.Instance.watertank[1].waterQuality.ToString();
+                GameManager.Instance.interfaceManager.defaultIf[(int)_DefaultInterface._Tank2].childs[3].GetComponent<Text>().text = stress.ToString();
                 break;
             case Item_Ty._SharkShop:
                 foreach (string key in GameManager.Instance.sharks.Keys)
