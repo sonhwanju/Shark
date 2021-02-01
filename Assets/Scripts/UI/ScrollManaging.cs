@@ -423,8 +423,10 @@ public class ScrollManaging : MonoBehaviour
     {
         for (int i = 0; i < GameManager.Instance.watertank[index].sharks.Count;)
         {
-            GameManager.Instance.money.AddMoney(GameManager.Instance.sharks[GameManager.Instance.watertank[index].sharks[i].name].price * (GameManager.Instance.watertank[index].sharks[i].curSize / GameManager.Instance.sharks[GameManager.Instance.watertank[index].sharks[i].name].maxSize));
+            GameManager.Instance.money.AddMoney(GameManager.Instance.sharks[GameManager.Instance.watertank[index].sharks[i].name].price * GameManager.Instance.watertank[index].sharks[i].curSize);
             GameManager.Instance.money.MoneyUpdate();
+            GameManager.Instance.downum.AddShark(GameManager.Instance.sharks[GameManager.Instance.watertank[index].sharks[i].name].special, 1);
+            GameManager.Instance.downum.SharkUpdate();
             GameManager.Instance.watertank[index].sharks.RemoveAt(i);
         }
         ItemLoad();
